@@ -8,22 +8,29 @@
 ===============================================================================
 */
 
-#include "board.h"
-
-#include <cr_section_macros.h>
+#include "charger.h"
 
 int main(void) {
-    // Read clock settings and update SystemCoreClock variable
-    SystemCoreClockUpdate();
-    Board_Init();
+    // Initialize the charger
+    auto c = new Charger();
 
-    // Set the LED to the state of "On"
-    Board_LED_Set(0, true);
-
-    // Force the counter to be placed into memory
+    // Start an infinite loop
+    // One iteration of this loop can be viewed graphically in the provided flowchart
     volatile static int i = 0 ;
-    // Enter an infinite loop, just incrementing a counter
     while(1) {
+    	// Measure the
+    	// Detect a load
+    	if (c->DetectLoad()){
+    		c->Enable(); // Start charging if a load is found
+
+
+
+
+    	} else if (c->IsCharging()) {
+    		c->Disable(); // Stop charging is no load is found
+    	}
+
+    	// Increment counter (accesses memory)
         i++ ;
     }
 
