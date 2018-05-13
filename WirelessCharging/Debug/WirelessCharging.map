@@ -11,7 +11,7 @@ C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Deb
 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(i2s_17xx_40xx.o)
                               C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o) (Chip_I2S_Init)
 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
-                              C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o) (Chip_IOCON_PinMux)
+                              ./inc/Charger.o (Chip_IOCON_PinMux)
 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
                               C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o) (Chip_SetupXtalClocking)
 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
@@ -210,7 +210,6 @@ Discarded input sections
  .debug_macro   0x00000000       0x1f ./src/sysinit.o
  .debug_macro   0x00000000       0x20 ./src/sysinit.o
  .debug_macro   0x00000000      0x187 ./src/sysinit.o
- .group         0x00000000        0x8 ./inc/Charger.o
  .group         0x00000000        0x8 ./inc/Charger.o
  .group         0x00000000        0x8 ./inc/Charger.o
  .group         0x00000000        0x8 ./inc/Charger.o
@@ -1293,7 +1292,7 @@ END GROUP
                 0x20084000                __top_RamAHB32 = 0x20084000
                 0x20084000                __top_RAM2 = 0x20084000
 
-.text           0x00000000     0x1880
+.text           0x00000000     0x1894
  FILL mask 0xff
                 0x00000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -1302,10 +1301,10 @@ END GROUP
                 0x000000cc                . = ALIGN (0x4)
                 0x000000cc                __section_table_start = .
                 0x000000cc                __data_section_table = .
-                0x000000cc        0x4 LONG 0x1880 LOADADDR (.data)
+                0x000000cc        0x4 LONG 0x1894 LOADADDR (.data)
                 0x000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x000000d4        0x4 LONG 0x840 SIZEOF (.data)
-                0x000000d8        0x4 LONG 0x1880 LOADADDR (.data_RAM2)
+                0x000000d8        0x4 LONG 0x1894 LOADADDR (.data_RAM2)
                 0x000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x000000e4                __data_section_table_end = .
@@ -1376,285 +1375,285 @@ END GROUP
                 0x0000028c       0x24 ./src/sysinit.o
                 0x0000028c                SystemInit
  .text._ZN7ChargerC2Ev
-                0x000002b0       0x28 ./inc/Charger.o
+                0x000002b0       0x3c ./inc/Charger.o
                 0x000002b0                Charger::Charger()
                 0x000002b0                Charger::Charger()
  .text._ZN7Charger6EnableEv
-                0x000002d8       0x1e ./inc/Charger.o
-                0x000002d8                Charger::Enable()
+                0x000002ec       0x1e ./inc/Charger.o
+                0x000002ec                Charger::Enable()
  .text._ZN7Charger7DisableEv
-                0x000002f6       0x1e ./inc/Charger.o
-                0x000002f6                Charger::Disable()
+                0x0000030a       0x1e ./inc/Charger.o
+                0x0000030a                Charger::Disable()
  .text._ZN7Charger10IsChargingEv
-                0x00000314       0x16 ./inc/Charger.o
-                0x00000314                Charger::IsCharging()
+                0x00000328       0x16 ./inc/Charger.o
+                0x00000328                Charger::IsCharging()
  .text._ZN7Charger10DetectLoadEv
-                0x0000032a       0x14 ./inc/Charger.o
-                0x0000032a                Charger::DetectLoad()
+                0x0000033e       0x14 ./inc/Charger.o
+                0x0000033e                Charger::DetectLoad()
  .text.Chip_IOCON_Init
-                0x0000033e       0x16 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x00000352       0x16 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Chip_GPIO_Init
-                0x00000354       0x16 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x00000368       0x16 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Chip_GPIO_SetPinState
-                0x0000036a       0x68 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x0000037e       0x68 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Chip_GPIO_WritePortBit
-                0x000003d2       0x2c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x000003e6       0x2c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Chip_GPIO_SetPinDIROutput
-                0x000003fe       0x38 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x00000412       0x38 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Chip_GPIO_SetPinDIRInput
-                0x00000436       0x3a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x0000044a       0x3a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Chip_GPIO_SetPinDIR
-                0x00000470       0x42 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x00000484       0x42 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Chip_GPIO_WriteDirBit
-                0x000004b2       0x2e C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x000004c6       0x2e C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Chip_UART_ConfigData
-                0x000004e0       0x1a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- *fill*         0x000004fa        0x2 ff
+                0x000004f4       0x1a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ *fill*         0x0000050e        0x2 ff
  .text.Board_LED_Init
-                0x000004fc       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x00000510       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
  .text.Board_UART_Init
-                0x00000514       0x12 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
-                0x00000514                Board_UART_Init
- *fill*         0x00000526        0x2 ff
+                0x00000528       0x12 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x00000528                Board_UART_Init
+ *fill*         0x0000053a        0x2 ff
  .text.Board_Debug_Init
-                0x00000528       0x30 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
-                0x00000528                Board_Debug_Init
+                0x0000053c       0x30 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x0000053c                Board_Debug_Init
  .text.Board_LED_Set
-                0x00000558       0x30 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
-                0x00000558                Board_LED_Set
+                0x0000056c       0x30 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x0000056c                Board_LED_Set
  .text.Board_Init
-                0x00000588       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
-                0x00000588                Board_Init
+                0x0000059c       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x0000059c                Board_Init
  .text.Chip_SYSCTL_SetFLASHAccess
-                0x000005ac       0x30 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+                0x000005c0       0x30 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
  .text.Board_SetupMuxing
-                0x000005dc       0x1c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
-                0x000005dc                Board_SetupMuxing
+                0x000005f0       0x1c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+                0x000005f0                Board_SetupMuxing
  .text.Board_SetupClocking
-                0x000005f8       0x12 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
-                0x000005f8                Board_SetupClocking
+                0x0000060c       0x12 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+                0x0000060c                Board_SetupClocking
  .text.Board_SystemInit
-                0x0000060a       0x10 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
-                0x0000060a                Board_SystemInit
- *fill*         0x0000061a        0x2 ff
+                0x0000061e       0x10 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+                0x0000061e                Board_SystemInit
+ *fill*         0x0000062e        0x2 ff
  .text.SystemCoreClockUpdate
-                0x0000061c       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
-                0x0000061c                SystemCoreClockUpdate
+                0x00000630       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
+                0x00000630                SystemCoreClockUpdate
  .text.Chip_Clock_IsMainPLLEnabled
-                0x00000634       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000648       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
  .text.Chip_Clock_IsMainPLLConnected
-                0x00000658       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x0000066c       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
  .text.Chip_Clock_FeedPLL
-                0x0000067c       0x34 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000690       0x34 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
  .text.Chip_Clock_GetMainPLLSource
-                0x000006b0       0x20 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x000006c4       0x20 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
  .text.Chip_Clock_GetMainOscRate
-                0x000006d0       0x14 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
- .text.Chip_Clock_GetIntOscRate
                 0x000006e4       0x14 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
- .text.Chip_Clock_GetRTCOscRate
+ .text.Chip_Clock_GetIntOscRate
                 0x000006f8       0x14 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+ .text.Chip_Clock_GetRTCOscRate
+                0x0000070c       0x14 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
  .text.Chip_Clock_GetMainPLLInClockRate
-                0x0000070c        0xe C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
- *fill*         0x0000071a        0x2 ff
+                0x00000720        0xe C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+ *fill*         0x0000072e        0x2 ff
  .text.Chip_Clock_EnablePLL
-                0x0000071c       0x44 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x0000071c                Chip_Clock_EnablePLL
+                0x00000730       0x44 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000730                Chip_Clock_EnablePLL
  .text.Chip_Clock_DisablePLL
-                0x00000760       0x48 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x00000760                Chip_Clock_DisablePLL
+                0x00000774       0x48 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000774                Chip_Clock_DisablePLL
  .text.Chip_Clock_SetupPLL
-                0x000007a8       0x5c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x000007a8                Chip_Clock_SetupPLL
+                0x000007bc       0x5c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x000007bc                Chip_Clock_SetupPLL
  .text.Chip_Clock_EnablePeriphClock
-                0x00000804       0x34 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x00000804                Chip_Clock_EnablePeriphClock
+                0x00000818       0x34 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000818                Chip_Clock_EnablePeriphClock
  .text.Chip_Clock_GetCPUClockSource
-                0x00000838       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x00000838                Chip_Clock_GetCPUClockSource
+                0x0000084c       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x0000084c                Chip_Clock_GetCPUClockSource
  .text.Chip_Clock_SetCPUClockDiv
-                0x0000085c       0x20 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x0000085c                Chip_Clock_SetCPUClockDiv
+                0x00000870       0x20 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000870                Chip_Clock_SetCPUClockDiv
  .text.Chip_Clock_GetCPUClockDiv
-                0x0000087c       0x1c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x0000087c                Chip_Clock_GetCPUClockDiv
+                0x00000890       0x1c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000890                Chip_Clock_GetCPUClockDiv
  .text.Chip_Clock_GetPCLKDiv
-                0x00000898       0x8c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x00000898                Chip_Clock_GetPCLKDiv
+                0x000008ac       0x8c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x000008ac                Chip_Clock_GetPCLKDiv
  .text.Chip_Clock_GetSYSCLKRate
-                0x00000924       0x34 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x00000924                Chip_Clock_GetSYSCLKRate
+                0x00000938       0x34 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000938                Chip_Clock_GetSYSCLKRate
  .text.Chip_Clock_GetMainPLLOutClockRate
-                0x00000958       0x54 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x00000958                Chip_Clock_GetMainPLLOutClockRate
+                0x0000096c       0x54 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x0000096c                Chip_Clock_GetMainPLLOutClockRate
  .text.Chip_Clock_GetMainClockRate
-                0x000009ac       0x28 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x000009ac                Chip_Clock_GetMainClockRate
+                0x000009c0       0x28 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x000009c0                Chip_Clock_GetMainClockRate
  .text.Chip_Clock_GetSystemClockRate
-                0x000009d4       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x000009d4                Chip_Clock_GetSystemClockRate
+                0x000009e8       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x000009e8                Chip_Clock_GetSystemClockRate
  .text.Chip_Clock_GetPeripheralClockRate
-                0x000009ec       0x26 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
-                0x000009ec                Chip_Clock_GetPeripheralClockRate
+                0x00000a00       0x26 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+                0x00000a00                Chip_Clock_GetPeripheralClockRate
  .text.Chip_IOCON_PinMuxSet
-                0x00000a12       0x36 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
-                0x00000a12                Chip_IOCON_PinMuxSet
+                0x00000a26       0x36 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
+                0x00000a26                Chip_IOCON_PinMuxSet
  .text.Chip_IOCON_PinMux
-                0x00000a48       0x92 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
-                0x00000a48                Chip_IOCON_PinMux
+                0x00000a5c       0x92 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
+                0x00000a5c                Chip_IOCON_PinMux
  .text.Chip_IOCON_SetPinMuxing
-                0x00000ada       0x62 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
-                0x00000ada                Chip_IOCON_SetPinMuxing
+                0x00000aee       0x62 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
+                0x00000aee                Chip_IOCON_SetPinMuxing
  .text.Chip_Clock_IsMainPLLEnabled
-                0x00000b3c       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+                0x00000b50       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
  .text.Chip_Clock_IsMainPLLLocked
-                0x00000b60       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+                0x00000b74       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
  .text.Chip_Clock_IsMainPLLConnected
-                0x00000b84       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+                0x00000b98       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
  .text.Chip_Clock_EnableCrystal
-                0x00000ba8       0x20 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+                0x00000bbc       0x20 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
  .text.Chip_Clock_IsCrystalEnabled
-                0x00000bc8       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+                0x00000bdc       0x24 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
  .text.Chip_Clock_SetMainPLLSource
-                0x00000bec       0x20 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+                0x00000c00       0x20 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
  .text.Chip_SetupXtalClocking
-                0x00000c0c       0x90 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
-                0x00000c0c                Chip_SetupXtalClocking
+                0x00000c20       0x90 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+                0x00000c20                Chip_SetupXtalClocking
  .text.Chip_UART_SetupFIFOS
-                0x00000c9c       0x1a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000cb0       0x1a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
  .text.Chip_UART_ConfigData
-                0x00000cb6       0x1a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000cca       0x1a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
  .text.Chip_UART_EnableDivisorAccess
-                0x00000cd0       0x1e C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000ce4       0x1e C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
  .text.Chip_UART_DisableDivisorAccess
-                0x00000cee       0x1e C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000d02       0x1e C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
  .text.Chip_UART_SetDivisorLatches
-                0x00000d0c       0x26 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
- *fill*         0x00000d32        0x2 ff
+                0x00000d20       0x26 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+ *fill*         0x00000d46        0x2 ff
  .text.Chip_UART_GetClockIndex
-                0x00000d34       0x50 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000d48       0x50 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
  .text.Chip_UART_GetClkIndex
-                0x00000d84       0x50 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000d98       0x50 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
  .text.Chip_UART_Init
-                0x00000dd4       0x78 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
-                0x00000dd4                Chip_UART_Init
+                0x00000de8       0x78 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000de8                Chip_UART_Init
  .text.Chip_UART_TXEnable
-                0x00000e4c       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
-                0x00000e4c                Chip_UART_TXEnable
+                0x00000e60       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000e60                Chip_UART_TXEnable
  .text.Chip_UART_TXDisable
-                0x00000e64       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
-                0x00000e64                Chip_UART_TXDisable
+                0x00000e78       0x18 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000e78                Chip_UART_TXDisable
  .text.Chip_UART_SetBaud
-                0x00000e7c       0x62 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
-                0x00000e7c                Chip_UART_SetBaud
- *fill*         0x00000ede        0x2 ff
+                0x00000e90       0x62 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+                0x00000e90                Chip_UART_SetBaud
+ *fill*         0x00000ef2        0x2 ff
  .text.__libc_init_array
-                0x00000ee0       0x50 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-init.o)
-                0x00000ee0                __libc_init_array
- .text.malloc   0x00000f30       0x10 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-malloc.o)
-                0x00000f30                malloc
+                0x00000ef4       0x50 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-init.o)
+                0x00000ef4                __libc_init_array
+ .text.malloc   0x00000f44       0x10 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-malloc.o)
+                0x00000f44                malloc
  .text._malloc_r
-                0x00000f40      0x544 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-mallocr.o)
-                0x00000f40                _malloc_r
+                0x00000f54      0x544 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-mallocr.o)
+                0x00000f54                _malloc_r
  .text.__malloc_lock
-                0x00001484        0xc c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-mlock.o)
-                0x00001484                __malloc_lock
+                0x00001498        0xc c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-mlock.o)
+                0x00001498                __malloc_lock
  .text.__malloc_unlock
-                0x00001490        0xc c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-mlock.o)
-                0x00001490                __malloc_unlock
- .text._sbrk_r  0x0000149c       0x24 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-sbrkr.o)
-                0x0000149c                _sbrk_r
+                0x000014a4        0xc c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-mlock.o)
+                0x000014a4                __malloc_unlock
+ .text._sbrk_r  0x000014b0       0x24 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-sbrkr.o)
+                0x000014b0                _sbrk_r
  .text._malloc_trim_r
-                0x000014c0       0xa0 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-freer.o)
-                0x000014c0                _malloc_trim_r
- .text._free_r  0x00001560      0x1cc c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-freer.o)
-                0x00001560                _free_r
+                0x000014d4       0xa0 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-freer.o)
+                0x000014d4                _malloc_trim_r
+ .text._free_r  0x00001574      0x1cc c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-freer.o)
+                0x00001574                _free_r
  .text.__retarget_lock_acquire_recursive
-                0x0000172c        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
-                0x0000172c                __retarget_lock_acquire_recursive
+                0x00001740        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+                0x00001740                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x00001730        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
-                0x00001730                __retarget_lock_release_recursive
- .text._sbrk    0x00001734       0x3c c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
-                0x00001734                _sbrk
+                0x00001744        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+                0x00001744                __retarget_lock_release_recursive
+ .text._sbrk    0x00001748       0x3c c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
+                0x00001748                _sbrk
  .text.__check_heap_overflow
-                0x00001770       0x18 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
-                0x00001770                __check_heap_overflow
- .text          0x00001788       0x6c c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtbegin.o
- .text.__errno  0x000017f4        0xc c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-errno.o)
-                0x000017f4                __errno
+                0x00001784       0x18 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
+                0x00001784                __check_heap_overflow
+ .text          0x0000179c       0x6c c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtbegin.o
+ .text.__errno  0x00001808        0xc c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-errno.o)
+                0x00001808                __errno
  *(.rodata .rodata.* .constdata .constdata.*)
  .rodata.OscRateIn
-                0x00001800        0x4 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
-                0x00001800                OscRateIn
+                0x00001814        0x4 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x00001814                OscRateIn
  .rodata.RTCOscRateIn
-                0x00001804        0x4 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
-                0x00001804                RTCOscRateIn
+                0x00001818        0x4 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+                0x00001818                RTCOscRateIn
  .rodata.pinmuxing
-                0x00001808       0x5c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
-                0x00001864                . = ALIGN (0x4)
-                0x00001864                . = ALIGN (0x4)
+                0x0000181c       0x5c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+                0x00001878                . = ALIGN (0x4)
+                0x00001878                . = ALIGN (0x4)
  *(.init)
- .init          0x00001864        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crti.o
-                0x00001864                _init
- .init          0x00001868        0x8 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtn.o
-                0x00001870                . = ALIGN (0x4)
-                0x00001870                __preinit_array_start = .
+ .init          0x00001878        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crti.o
+                0x00001878                _init
+ .init          0x0000187c        0x8 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtn.o
+                0x00001884                . = ALIGN (0x4)
+                0x00001884                __preinit_array_start = .
  *(.preinit_array)
-                0x00001870                __preinit_array_end = .
-                0x00001870                . = ALIGN (0x4)
-                0x00001870                __init_array_start = .
+                0x00001884                __preinit_array_end = .
+                0x00001884                . = ALIGN (0x4)
+                0x00001884                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00001870        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtbegin.o
-                0x00001874                __init_array_end = .
+ .init_array    0x00001884        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtbegin.o
+                0x00001888                __init_array_end = .
  *(.fini)
- .fini          0x00001874        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crti.o
-                0x00001874                _fini
- .fini          0x00001878        0x8 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtn.o
-                0x00001880                . = ALIGN (0x4)
+ .fini          0x00001888        0x4 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crti.o
+                0x00001888                _fini
+ .fini          0x0000188c        0x8 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtn.o
+                0x00001894                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x00001880                . = ALIGN (0x4)
+                0x00001894                . = ALIGN (0x4)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x00001880                . = ALIGN (0x4)
+                0x00001894                . = ALIGN (0x4)
 
-.glue_7         0x00001880        0x0
- .glue_7        0x00001880        0x0 linker stubs
+.glue_7         0x00001894        0x0
+ .glue_7        0x00001894        0x0 linker stubs
 
-.glue_7t        0x00001880        0x0
- .glue_7t       0x00001880        0x0 linker stubs
+.glue_7t        0x00001894        0x0
+ .glue_7t       0x00001894        0x0 linker stubs
 
-.vfp11_veneer   0x00001880        0x0
- .vfp11_veneer  0x00001880        0x0 linker stubs
+.vfp11_veneer   0x00001894        0x0
+ .vfp11_veneer  0x00001894        0x0 linker stubs
 
-.v4_bx          0x00001880        0x0
- .v4_bx         0x00001880        0x0 linker stubs
+.v4_bx          0x00001894        0x0
+ .v4_bx         0x00001894        0x0 linker stubs
 
-.iplt           0x00001880        0x0
- .iplt          0x00001880        0x0 ./src/cr_cpp_config.o
+.iplt           0x00001894        0x0
+ .iplt          0x00001894        0x0 ./src/cr_cpp_config.o
 
-.rel.dyn        0x00001880        0x0
- .rel.iplt      0x00001880        0x0 ./src/cr_cpp_config.o
+.rel.dyn        0x00001894        0x0
+ .rel.iplt      0x00001894        0x0 ./src/cr_cpp_config.o
 
-.eh_frame       0x00001880        0x0
- .eh_frame      0x00001880        0x0 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtbegin.o
+.eh_frame       0x00001894        0x0
+ .eh_frame      0x00001894        0x0 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00001880                __exidx_start = .
+                0x00001894                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00001880                __exidx_end = .
-                0x00001880                _etext = .
+                0x00001894                __exidx_end = .
+                0x00001894                _etext = .
 
-.data_RAM2      0x2007c000        0x0 load address 0x00001880
+.data_RAM2      0x2007c000        0x0 load address 0x00001894
  FILL mask 0xff
                 [!provide]                PROVIDE (__start_data_RAM2, .)
  *(.ramfunc.$RAM2)
@@ -1670,7 +1669,7 @@ END GROUP
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _end_uninit_RESERVED = .
 
-.data           0x10000000      0x840 load address 0x00001880
+.data           0x10000000      0x840 load address 0x00001894
  FILL mask 0xff
                 0x10000000                _data = .
  *(vtable)
@@ -1694,10 +1693,10 @@ END GROUP
                 0x10000840                . = ALIGN (0x4)
                 0x10000840                _edata = .
 
-.igot.plt       0x10000840        0x0 load address 0x000020c0
+.igot.plt       0x10000840        0x0 load address 0x000020d4
  .igot.plt      0x10000840        0x0 ./src/cr_cpp_config.o
 
-.jcr            0x10000840        0x0 load address 0x000020c0
+.jcr            0x10000840        0x0 load address 0x000020d4
  .jcr           0x10000840        0x0 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m\crtbegin.o
 
 .bss_RAM2       0x2007c000        0x0
@@ -1762,41 +1761,41 @@ END GROUP
                 0x10008000                PROVIDE (_vStackTop, DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 0xefff74ca                PROVIDE (__valid_user_code_checksum, (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x00000000                _image_start = LOADADDR (.text)
-                0x000020c0                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x000020c0                _image_size = (_image_end - _image_start)
+                0x000020d4                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x000020d4                _image_size = (_image_end - _image_start)
 OUTPUT(WirelessCharging.axf elf32-littlearm)
 
-.debug_info     0x00000000     0x7563
+.debug_info     0x00000000     0x7564
  .debug_info    0x00000000     0x10b9 ./src/cr_cpp_config.o
  .debug_info    0x000010b9      0x25f ./src/cr_startup_lpc175x_6x.o
  .debug_info    0x00001318      0x11b ./src/main.o
  .debug_info    0x00001433      0x93b ./src/sysinit.o
- .debug_info    0x00001d6e      0xaa6 ./inc/Charger.o
- .debug_info    0x00002814     0x150a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_info    0x00003d1e      0x6c5 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
- .debug_info    0x000043e3      0x55a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
- .debug_info    0x0000493d      0xba2 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
- .debug_info    0x000054df      0x325 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
- .debug_info    0x00005804      0x479 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
- .debug_info    0x00005c7d      0xf16 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
- .debug_info    0x00006b93      0x966 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
- .debug_info    0x000074f9       0x6a c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
+ .debug_info    0x00001d6e      0xaa7 ./inc/Charger.o
+ .debug_info    0x00002815     0x150a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_info    0x00003d1f      0x6c5 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+ .debug_info    0x000043e4      0x55a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
+ .debug_info    0x0000493e      0xba2 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+ .debug_info    0x000054e0      0x325 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
+ .debug_info    0x00005805      0x479 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+ .debug_info    0x00005c7e      0xf16 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+ .debug_info    0x00006b94      0x966 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
+ .debug_info    0x000074fa       0x6a c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
 
-.debug_abbrev   0x00000000     0x1b3c
+.debug_abbrev   0x00000000     0x1b3e
  .debug_abbrev  0x00000000      0x332 ./src/cr_cpp_config.o
  .debug_abbrev  0x00000332      0x10e ./src/cr_startup_lpc175x_6x.o
  .debug_abbrev  0x00000440       0xd4 ./src/main.o
  .debug_abbrev  0x00000514      0x1c0 ./src/sysinit.o
- .debug_abbrev  0x000006d4      0x275 ./inc/Charger.o
- .debug_abbrev  0x00000949      0x3c2 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_abbrev  0x00000d0b      0x17e C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
- .debug_abbrev  0x00000e89      0x14d C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
- .debug_abbrev  0x00000fd6      0x301 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
- .debug_abbrev  0x000012d7      0x14a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
- .debug_abbrev  0x00001421      0x18a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
- .debug_abbrev  0x000015ab      0x30c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
- .debug_abbrev  0x000018b7      0x223 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
- .debug_abbrev  0x00001ada       0x62 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
+ .debug_abbrev  0x000006d4      0x277 ./inc/Charger.o
+ .debug_abbrev  0x0000094b      0x3c2 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_abbrev  0x00000d0d      0x17e C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+ .debug_abbrev  0x00000e8b      0x14d C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
+ .debug_abbrev  0x00000fd8      0x301 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+ .debug_abbrev  0x000012d9      0x14a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
+ .debug_abbrev  0x00001423      0x18a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+ .debug_abbrev  0x000015ad      0x30c C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+ .debug_abbrev  0x000018b9      0x223 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
+ .debug_abbrev  0x00001adc       0x62 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
 
 .debug_aranges  0x00000000      0x630
  .debug_aranges
@@ -1844,7 +1843,7 @@ OUTPUT(WirelessCharging.axf elf32-littlearm)
  .debug_ranges  0x00000530       0x10 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
  .debug_ranges  0x00000540       0x10 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
 
-.debug_macro    0x00000000     0x8435
+.debug_macro    0x00000000     0x83aa
  .debug_macro   0x00000000      0x132 ./src/cr_cpp_config.o
  .debug_macro   0x00000132      0x9a0 ./src/cr_cpp_config.o
  .debug_macro   0x00000ad2      0x143 ./src/cr_cpp_config.o
@@ -1928,45 +1927,44 @@ OUTPUT(WirelessCharging.axf elf32-littlearm)
  .debug_macro   0x000052b1      0x18b ./src/sysinit.o
  .debug_macro   0x0000543c       0x20 ./src/sysinit.o
  .debug_macro   0x0000545c       0x28 ./src/sysinit.o
- .debug_macro   0x00005484      0x391 ./inc/Charger.o
- .debug_macro   0x00005815       0x1c ./inc/Charger.o
- .debug_macro   0x00005831       0x16 ./inc/Charger.o
- .debug_macro   0x00005847      0xbb1 ./inc/Charger.o
- .debug_macro   0x000063f8       0x97 ./inc/Charger.o
- .debug_macro   0x0000648f      0x104 ./inc/Charger.o
- .debug_macro   0x00006593       0x82 ./inc/Charger.o
- .debug_macro   0x00006615      0x289 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_macro   0x0000689e      0x8c2 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_macro   0x00007160       0x10 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_macro   0x00007170      0x12d C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_macro   0x0000729d      0x5b2 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_macro   0x0000784f       0x22 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_macro   0x00007871       0x9a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_macro   0x0000790b       0x12 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_macro   0x0000791d      0x217 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
- .debug_macro   0x00007b34      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
- .debug_macro   0x00007d01      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
- .debug_macro   0x00007ece      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
- .debug_macro   0x0000809b      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
- .debug_macro   0x00008268      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+ .debug_macro   0x00005484      0x388 ./inc/Charger.o
+ .debug_macro   0x0000580c       0x1c ./inc/Charger.o
+ .debug_macro   0x00005828       0x16 ./inc/Charger.o
+ .debug_macro   0x0000583e      0xbb1 ./inc/Charger.o
+ .debug_macro   0x000063ef       0x97 ./inc/Charger.o
+ .debug_macro   0x00006486      0x104 ./inc/Charger.o
+ .debug_macro   0x0000658a      0x289 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_macro   0x00006813      0x8c2 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_macro   0x000070d5       0x10 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_macro   0x000070e5      0x12d C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_macro   0x00007212      0x5b2 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_macro   0x000077c4       0x22 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_macro   0x000077e6       0x9a C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_macro   0x00007880       0x12 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_macro   0x00007892      0x217 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+ .debug_macro   0x00007aa9      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
+ .debug_macro   0x00007c76      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+ .debug_macro   0x00007e43      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
+ .debug_macro   0x00008010      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+ .debug_macro   0x000081dd      0x1cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
 
-.debug_line     0x00000000     0x3cbf
+.debug_line     0x00000000     0x3ca9
  .debug_line    0x00000000      0x392 ./src/cr_cpp_config.o
  .debug_line    0x00000392       0xd4 ./src/cr_startup_lpc175x_6x.o
  .debug_line    0x00000466       0x87 ./src/main.o
  .debug_line    0x000004ed      0x672 ./src/sysinit.o
- .debug_line    0x00000b5f      0x70d ./inc/Charger.o
- .debug_line    0x0000126c      0x852 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
- .debug_line    0x00001abe      0x4d7 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
- .debug_line    0x00001f95      0x457 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
- .debug_line    0x000023ec      0x6d3 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
- .debug_line    0x00002abf      0x443 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
- .debug_line    0x00002f02      0x4cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
- .debug_line    0x000033cf      0x77f C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
- .debug_line    0x00003b4e      0x125 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
- .debug_line    0x00003c73       0x4c c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
+ .debug_line    0x00000b5f      0x6f7 ./inc/Charger.o
+ .debug_line    0x00001256      0x852 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_line    0x00001aa8      0x4d7 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+ .debug_line    0x00001f7f      0x457 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
+ .debug_line    0x000023d6      0x6d3 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+ .debug_line    0x00002aa9      0x443 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
+ .debug_line    0x00002eec      0x4cd C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+ .debug_line    0x000033b9      0x77f C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+ .debug_line    0x00003b38      0x125 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
+ .debug_line    0x00003c5d       0x4c c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
 
-.debug_str      0x00000000    0x19f68
+.debug_str      0x00000000    0x19b1f
  .debug_str     0x00000000     0x7393 ./src/cr_cpp_config.o
                                0x75a8 (size before relaxing)
  .debug_str     0x00007393      0x1f6 ./src/cr_startup_lpc175x_6x.o
@@ -1975,25 +1973,25 @@ OUTPUT(WirelessCharging.axf elf32-littlearm)
                                0x2a08 (size before relaxing)
  .debug_str     0x00007640     0xe9ae ./src/sysinit.o
                               0x1410f (size before relaxing)
- .debug_str     0x00015fee      0x4e1 ./inc/Charger.o
-                              0x14ab2 (size before relaxing)
- .debug_str     0x000164cf     0x28a3 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
+ .debug_str     0x00015fee       0x98 ./inc/Charger.o
+                              0x14669 (size before relaxing)
+ .debug_str     0x00016086     0x28a3 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board.o)
                               0x11a19 (size before relaxing)
- .debug_str     0x00018d72      0x22d C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
+ .debug_str     0x00018929      0x22d C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_board_nxp_lpcxpresso_1769\Debug\liblpc_board_nxp_lpcxpresso_1769.a(board_sysinit.o)
                               0x10f53 (size before relaxing)
- .debug_str     0x00018f9f       0xc6 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
+ .debug_str     0x00018b56       0xc6 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(chip_17xx_40xx.o)
                               0x10ba3 (size before relaxing)
- .debug_str     0x00019065      0x851 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
+ .debug_str     0x00018c1c      0x851 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(clock_17xx_40xx.o)
                               0x11221 (size before relaxing)
- .debug_str     0x000198b6       0x79 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
+ .debug_str     0x0001946d       0x79 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(iocon_17xx_40xx.o)
                               0x1069e (size before relaxing)
- .debug_str     0x0001992f       0xc4 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
+ .debug_str     0x000194e6       0xc4 C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(sysinit_17xx_40xx.o)
                               0x10886 (size before relaxing)
- .debug_str     0x000199f3      0x3ba C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
+ .debug_str     0x000195aa      0x3ba C:\Users\kurts\Documents\MCUXpressoIDE_10.1.1_606\workspace\lpc_chip_175x_6x\Debug\liblpc_chip_175x_6x.a(uart_17xx_40xx.o)
                               0x110f6 (size before relaxing)
- .debug_str     0x00019dad      0x196 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
+ .debug_str     0x00019964      0x196 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_sbrk.o)
                                 0x617 (size before relaxing)
- .debug_str     0x00019f43       0x25 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
+ .debug_str     0x00019afa       0x25 c:/nxp/mcuxpressoide_10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libcr_newlib_nohost.a(_cr_check_heap.o)
                                 0x166 (size before relaxing)
 
 .comment        0x00000000       0x7f

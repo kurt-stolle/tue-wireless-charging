@@ -8,8 +8,6 @@
 #include "board.h"
 #include <Charger.h>
 
-#include <cr_section_macros.h>
-
 // Charger is a class that performs hardware operations on the microcontroller
 Charger::Charger() {
 	// Read clock settings and update SystemCoreClock variable
