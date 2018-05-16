@@ -10,8 +10,10 @@
 
 class Charger {
 public:
+	// Constructor
 	Charger();
 
+	// Programming interface
 	void Enable();
 	void Disable();
 
@@ -19,8 +21,12 @@ public:
 
 	bool DetectLoad();
 private:
+	// State
 	bool charging;
 
+	// Analog-to-Digital Converter
+	static int ADCBitrate = 200000;
+	ADC_CLOCK_SETUP_T ADCSetup;
 };
 
 #endif /* CHARGER_H_ */

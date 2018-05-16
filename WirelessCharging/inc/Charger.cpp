@@ -14,6 +14,10 @@ Charger::Charger() {
 	SystemCoreClockUpdate();
 	Board_Init();
 
+	// Perform ADC setup
+	Chip_ADC_Init(LPC_ADC, &ADCSetup);
+	Chip_ADC_SetSampleRate(LPC_ADC, &ADCSetup, ADCBitrate);
+
 	// Indicate that by default charging is disabled
 	Board_LED_Set(0, false);
 	charging = false;
@@ -21,6 +25,17 @@ Charger::Charger() {
 	// Select pin P2.0 in PWM1.1 mode
 	Chip_IOCON_PinMux(LPC_IOCON, 4, 1, IOCON_MODE_INACT, IOCON_FUNC1);
 
+	// Select pin P0.2 in AD0.7 mode for power measurement
+	Chip_IOCON_PinMux(LPC_IOCON, 0, 1, IOCON_MODE_INACT, IOCON_FUNC2);
+	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH7, ENABLE);
+
+	// Select pin P0.3 in AD0.6 mode for power measurement
+	Chip_IOCON_PinMux(LPC_IOCON, 0, 2, IOCON_MODE_INACT, IOCON_FUNC2);
+	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH6, ENABLE);
+
+	// Select pin P0.25 in AD0.2 mode for load detection
+	Chip_IOCON_PinMux(LPC_IOCON, 1, 10, IOCON_MODE_INACT, IOCON_FUNC2);
+	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE);
 }
 
 // Enable starts the charger
