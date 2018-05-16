@@ -5,7 +5,6 @@
  *      Author: kurts
  */
 
-#include "board.h"
 #include <Charger.h>
 
 // Charger is a class that performs hardware operations on the microcontroller
@@ -24,6 +23,8 @@ Charger::Charger() {
 
 	// Select pin P2.0 in PWM1.1 mode
 	Chip_IOCON_PinMux(LPC_IOCON, 4, 1, IOCON_MODE_INACT, IOCON_FUNC1);
+	Chip_PWM_Init(LPC_PWM1);
+	Chip_PWM_Enable(LPC_PWM1);
 
 	// Select pin P0.2 in AD0.7 mode for power measurement
 	Chip_IOCON_PinMux(LPC_IOCON, 0, 1, IOCON_MODE_INACT, IOCON_FUNC2);

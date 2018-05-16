@@ -5,8 +5,12 @@
  *      Author: kurts
  */
 
+#include "board.h"
+#include "pwm_17xx_40xx.h"
+
 #ifndef CHARGER_H_
 #define CHARGER_H_
+
 
 class Charger {
 public:
@@ -25,7 +29,7 @@ private:
 	bool charging;
 
 	// Analog-to-Digital Converter
-	static int ADCBitrate = 200000;
+	static const int ADCBitrate = 200000;
 	ADC_CLOCK_SETUP_T ADCSetup;
 };
 
