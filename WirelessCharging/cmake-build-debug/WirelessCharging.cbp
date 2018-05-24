@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="WirelessCharging"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="WirelessCharging">
+				<Option output="D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/WirelessCharging.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_board_nxp_lpcxpresso_1769/inc"/>
+					<Add directory="C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc"/>
+					<Add directory="D:/Git/tue-wireless-charging/WirelessCharging/."/>
+					<Add directory="D:/Git/tue-wireless-charging/WirelessCharging/inc"/>
+					<Add directory="D:/Git/tue-wireless-charging/WirelessCharging/src"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 WirelessCharging"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="WirelessCharging/fast">
+				<Option output="D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/WirelessCharging.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_board_nxp_lpcxpresso_1769/inc"/>
+					<Add directory="C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc"/>
+					<Add directory="D:/Git/tue-wireless-charging/WirelessCharging/."/>
+					<Add directory="D:/Git/tue-wireless-charging/WirelessCharging/inc"/>
+					<Add directory="D:/Git/tue-wireless-charging/WirelessCharging/src"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 WirelessCharging/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Git/tue-wireless-charging/WirelessCharging/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Git/tue-wireless-charging/WirelessCharging/inc/Charger.cpp">
+			<Option target="WirelessCharging"/>
+		</Unit>
+		<Unit filename="D:/Git/tue-wireless-charging/WirelessCharging/inc/Charger.h">
+			<Option target="WirelessCharging"/>
+		</Unit>
+		<Unit filename="D:/Git/tue-wireless-charging/WirelessCharging/src/cr_cpp_config.cpp">
+			<Option target="WirelessCharging"/>
+		</Unit>
+		<Unit filename="D:/Git/tue-wireless-charging/WirelessCharging/src/cr_startup_lpc175x_6x.cpp">
+			<Option target="WirelessCharging"/>
+		</Unit>
+		<Unit filename="D:/Git/tue-wireless-charging/WirelessCharging/src/crp.c">
+			<Option target="WirelessCharging"/>
+		</Unit>
+		<Unit filename="D:/Git/tue-wireless-charging/WirelessCharging/src/main.cpp">
+			<Option target="WirelessCharging"/>
+		</Unit>
+		<Unit filename="D:/Git/tue-wireless-charging/WirelessCharging/src/sysinit.c">
+			<Option target="WirelessCharging"/>
+		</Unit>
+		<Unit filename="D:/Git/tue-wireless-charging/WirelessCharging/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

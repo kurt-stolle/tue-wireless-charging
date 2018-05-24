@@ -5,7 +5,11 @@
  * Generated linker script file for LPC1769
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.23
+<<<<<<< Updated upstream
  * MCUXpresso IDE v10.1.1 [Build 606] [2018-01-02]  on May 16, 2018 1:43:39 PM
+=======
+ * MCUXpresso IDE v10.1.1 [Build 606] [2018-01-02]  on May 24, 2018 2:27:27 PM
+>>>>>>> Stashed changes
  */
 
 INCLUDE "WirelessCharging_Debug_library.ld"
