@@ -16,7 +16,7 @@ extern "C" {
 
 #include "core_cm3.h"
 
-    typedef struct {                                        /*!< TIMERn Structure       */
+    typedef struct {
             __IO uint32_t IR;                               /*!< Interrupt Register. The IR can be written to clear interrupts. The IR can be read to identify which of eight possible interrupt sources are pending. */
             __IO uint32_t TCR;                              /*!< Timer Control Register. The TCR is used to control the Timer Counter functions. The Timer Counter can be disabled or reset through the TCR. */
             __IO uint32_t TC;                               /*!< Timer Counter. The 32 bit TC is incremented every PR+1 cycles of PCLK. The TC is controlled through the TCR. */

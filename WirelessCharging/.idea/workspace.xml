@@ -36,8 +36,8 @@
       <file leaf-file-name="Charger.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/inc/Charger.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="66" lean-forward="false" selection-start-line="33" selection-start-column="66" selection-end-line="33" selection-end-column="66" />
+            <state relative-caret-position="592">
+              <caret line="41" column="102" lean-forward="false" selection-start-line="41" selection-start-column="102" selection-end-line="41" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -46,8 +46,8 @@
       <file leaf-file-name="Charger.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/Charger.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+            <state relative-caret-position="442">
+              <caret line="29" column="41" lean-forward="false" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
               <folding>
                 <element signature="e#73#91#0" expanded="true" />
               </folding>
@@ -55,10 +55,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="core_cm3.h" pinned="false" current-in-tab="false">
+        <entry file="file://C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc/core_cm3.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="182" column="12" lean-forward="false" selection-start-line="182" selection-start-column="12" selection-end-line="182" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="chip_lpc175x_6x.h" pinned="false" current-in-tab="false">
         <entry file="file://C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc/chip_lpc175x_6x.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="299">
               <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
               <folding />
             </state>
@@ -68,8 +78,8 @@
       <file leaf-file-name="pwm_17xx_40xx.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/pwm_17xx_40xx.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="163" column="8" lean-forward="false" selection-start-line="163" selection-start-column="8" selection-end-line="164" selection-end-column="32" />
+            <state relative-caret-position="221">
+              <caret line="199" column="3" lean-forward="true" selection-start-line="199" selection-start-column="3" selection-end-line="199" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -89,7 +99,7 @@
         <entry file="file://C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc/clock_17xx_40xx.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
-              <caret line="249" column="5" lean-forward="true" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
+              <caret line="249" column="5" lean-forward="false" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -130,6 +140,7 @@
       <list>
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
+        <option value="$PROJECT_DIR$/inc/pwm_17xx_40xx.h" />
         <option value="$PROJECT_DIR$/inc/Charger.h" />
         <option value="$PROJECT_DIR$/inc/Charger.cpp" />
       </list>
@@ -376,12 +387,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527165689574</updated>
-      <workItem from="1527165692694" duration="990000" />
+      <workItem from="1527165692694" duration="2681000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="990000" />
+    <option name="totallyTimeSpent" value="2681000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -467,24 +478,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc/chip_lpc175x_6x.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inc/Charger.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-          <folding>
-            <element signature="e#73#91#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pwm_17xx_40xx.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -496,23 +489,49 @@
     <entry file="file://C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc/clock_17xx_40xx.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
-          <caret line="249" column="5" lean-forward="true" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
+          <caret line="249" column="5" lean-forward="false" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inc/pwm_17xx_40xx.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="163" column="8" lean-forward="false" selection-start-line="163" selection-start-column="8" selection-end-line="164" selection-end-column="32" />
+        <state relative-caret-position="221">
+          <caret line="199" column="3" lean-forward="true" selection-start-line="199" selection-start-column="3" selection-end-line="199" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc/chip_lpc175x_6x.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/nxp/MCUXpressoIDE_10.1.1_606/ide/Examples/LPCOpen/lpcopen_2_10_lpcxpresso_nxp_lpcxpresso_1769/lpc_chip_175x_6x/inc/core_cm3.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="182" column="12" lean-forward="false" selection-start-line="182" selection-start-column="12" selection-end-line="182" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Charger.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="29" column="41" lean-forward="false" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+          <folding>
+            <element signature="e#73#91#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inc/Charger.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="66" lean-forward="false" selection-start-line="33" selection-start-column="66" selection-end-line="33" selection-end-column="66" />
+        <state relative-caret-position="592">
+          <caret line="41" column="102" lean-forward="false" selection-start-line="41" selection-start-column="102" selection-end-line="41" selection-end-column="102" />
           <folding />
         </state>
       </provider>
