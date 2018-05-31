@@ -93,7 +93,7 @@ double Charger::GetPower() {
 	Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataVoltage);
 
     // Parse sensor readings
-	double V = (dataVoltage*3.3)/(2^12);
+	double V = (dataVoltage*3.3)/(2^12); //computation from: https://learn.sparkfun.com/tutorials/analog-to-digital-conversion
 	double I = (dataCurrent*3.3)/(2^12);
 
     // Return power
@@ -109,4 +109,4 @@ bool Charger::IsCharging() {
 bool Charger::DetectLoad() {
 	return true;
 }
->>>>>>> 302fedc0dbac74892c7b379d940789da33e892e1
+
