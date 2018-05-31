@@ -15,6 +15,9 @@ static volatile uint8_t Burst_Mode_Flag = 0, Interrupt_Continue_Flag;
 >>>>>>> 302fedc0dbac74892c7b379d940789da33e892e1
 
 Charger::Charger() {
+	// GPDMA SETUP
+	Chip_GPDMA_Init(LPC_GPDMA);
+
 	// A/D CONVERTERS SETUP
 	Chip_ADC_Init(LPC_ADC, &ADCSetup);
 	Chip_ADC_SetSampleRate(LPC_ADC, &ADCSetup, ADC_BITRATE);
@@ -49,9 +52,9 @@ Charger::Charger() {
 	Chip_IOCON_PinMux(LPC_IOCON, 2, 3, IOCON_MODE_INACT, IOCON_FUNC1);  // Select pin P2.3 in PWM4 mode
 
 	LPC_PWM1->MR1 = 0; 												// PWM2 set at 0
-	LPC_PWM1->MR2 = PWM_CYCLE_TIME/2; 								// PWM2 reset at T/2
-	LPC_PWM1->MR3 = PWM_CYCLE_TIME/2;								// PWM4 set at T/2
-	LPC_PWM1->MR4 = PWM_CYCLE_TIME-1;								// PWM4 reset at T-1
+	LPC_PWM1->MR2 = PWM_CYCLE_TIME * 0.4; 							// PWM2 reset
+	LPC_PWM1->MR3 = PWM_CYCLE_TIME * 0.4;							// PWM4 set
+	LPC_PWM1->MR4 = PWM_CYCLE_TIME;									// PWM4 reset at T-1
 	LPC_PWM1->LER = (1<<0) | (1<<1) | (1<<2) | (1<<3) | (1<<4); 	// Push new MR0-4 values
 
 	// BOOST CONVERTER PWM CONTROL
@@ -80,6 +83,12 @@ double Charger::GetPower() {
 	uint16_t dataVoltage;
 	uint16_t dataCurrent;
 
+<<<<<<< HEAD
+=======
+	// Enable burst mode
+	Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
+
+>>>>>>> 2ca165bca1974a9a50366aac28ccece4600dd3a5
 	 // Wait for A/D conversion to complete
 	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
 
@@ -92,9 +101,17 @@ double Charger::GetPower() {
 	// Read the value of the ADC on CH1 into dataVoltage
 	Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataVoltage);
 
+	// Disable burst mode
+	Chip_ADC_SetBurstCmd(LPC_ADC, DISABLE);
+
     // Parse sensor readings
+<<<<<<< HEAD
 	double V = (dataVoltage*3.3)/(2^12); //computation from: https://learn.sparkfun.com/tutorials/analog-to-digital-conversion
 	double I = (dataCurrent*3.3)/(2^12);
+=======
+	double V = (dataVoltage*3.3)/(4096);
+	double I = (dataCurrent*3.3)/(4096);
+>>>>>>> 2ca165bca1974a9a50366aac28ccece4600dd3a5
 
     // Return power
 	return V*I;
@@ -105,8 +122,10 @@ bool Charger::IsCharging() {
 	return charging;
 }
 
+
 // DetectLoad will send out a pulse and measure the response of the sensor
 bool Charger::DetectLoad() {
+
 	return true;
 }
 

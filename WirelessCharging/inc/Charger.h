@@ -35,8 +35,8 @@ typedef struct {
 
 
 #define LPC_PWM1  ((LPC_PWM_T*) LPC_PWM1_BASE)  // Cast the region of memory to our LPC_PWM_T type
-#define ADC_BITRATE 2000000                     // ADC bitrate
-#define PWM_CYCLE_TIME 100                      // PWM cycle time
+#define ADC_BITRATE 100000                     // ADC bitrate
+#define PWM_CYCLE_TIME 400                      // PWM cycle time
 
 // Charger is a class that performs hardware operations on the microcontroller
 class Charger {
