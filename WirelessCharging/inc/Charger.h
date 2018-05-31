@@ -47,6 +47,8 @@ class Charger {
   void Enable();
   void Disable();
 
+  void CalculatePower();
+
   bool IsCharging();
 
   bool DetectLoad();

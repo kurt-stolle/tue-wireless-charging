@@ -6,6 +6,7 @@
  */
 
 #include <Charger.h>
+#define 3V3 3.3
 
 // Charger is a class that performs hardware operations on the microcontroller
 Charger::Charger() {
@@ -70,6 +71,28 @@ void Charger::Disable() {
 
 	// Disable LED indicator
 	Board_LED_Set(0, false);
+}
+
+void Charger::CalculatePower() {
+	uint16_t dataCurrent;
+	uint16_t dataVoltage;
+
+	/* Waiting for A/D conversion complete */
+	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH0, ADC_DR_DONE_STAT) != SET) {}
+	/* Read ADC value */
+	Chip_ADC_ReadValue(LPC_ADC, ADC_CH0, &dataCurrent);
+
+
+	/* Waiting for A/D conversion complete */
+	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
+	/* Read ADC value */
+	Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataVoltage);
+
+
+	Voltage = (dataVoltage*3V3)/(2^12);
+	Current = (dateCurrent*3V3)/(2^12);
+	Power = Voltage*Current;
+	return Power;
 }
 
 // IsCharging indicates whether charging has started
