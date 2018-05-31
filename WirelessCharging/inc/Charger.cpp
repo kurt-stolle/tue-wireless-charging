@@ -6,13 +6,11 @@
  */
 
 #include <Charger.h>
-<<<<<<< HEAD
 #define 3V3 3.3
 static ADC_CLOCK_SETUP_T ADCSetup;
 static volatile uint8_t Burst_Mode_Flag = 0, Interrupt_Continue_Flag;
 
-=======
->>>>>>> 302fedc0dbac74892c7b379d940789da33e892e1
+
 
 Charger::Charger() {
 	// GPDMA SETUP
@@ -83,12 +81,9 @@ double Charger::GetPower() {
 	uint16_t dataVoltage;
 	uint16_t dataCurrent;
 
-<<<<<<< HEAD
-=======
 	// Enable burst mode
 	Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
 
->>>>>>> 2ca165bca1974a9a50366aac28ccece4600dd3a5
 	 // Wait for A/D conversion to complete
 	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
 
@@ -105,13 +100,8 @@ double Charger::GetPower() {
 	Chip_ADC_SetBurstCmd(LPC_ADC, DISABLE);
 
     // Parse sensor readings
-<<<<<<< HEAD
-	double V = (dataVoltage*3.3)/(2^12); //computation from: https://learn.sparkfun.com/tutorials/analog-to-digital-conversion
-	double I = (dataCurrent*3.3)/(2^12);
-=======
-	double V = (dataVoltage*3.3)/(4096);
-	double I = (dataCurrent*3.3)/(4096);
->>>>>>> 2ca165bca1974a9a50366aac28ccece4600dd3a5
+	double V = (dataVoltage*3V3)/(4096);
+	double I = (dataCurrent*3V3)/(4096);
 
     // Return power
 	return V*I;
