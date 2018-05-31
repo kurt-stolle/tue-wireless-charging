@@ -80,48 +80,6 @@ double Charger::GetPower() {
 	uint16_t dataVoltage;
 	uint16_t dataCurrent;
 
-<<<<<<< HEAD
-	if (Burst_Mode_Flag) {
-		Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
-	}
-	else {
-		Chip_ADC_SetBurstCmd(LPC_ADC, DISABLE);
-	}
-
-	/* Get  adc value until get 'x' character */
-	while (DEBUGIN() != 'x') {
-		/* Start A/D conversion if not using burst mode */
-		if (!Burst_Mode_Flag) {
-			Chip_ADC_SetStartMode(LPC_ADC, ADC_START_NOW, ADC_TRIGGERMODE_RISING);
-		}
-		/* Waiting for A/D conversion complete */
-		while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH0, ADC_DR_DONE_STAT) != SET) {}
-		/* Read ADC value */
-		Chip_ADC_ReadValue(LPC_ADC, ADC_CH0, &dataCurrent);
-
-
-		/* Waiting for A/D conversion complete */
-		while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
-		/* Read ADC value */
-		Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataVoltage);
-
-
-		Voltage = (dataVoltage*3V3)/(2^12);
-		Current = (dateCurrent*3V3)/(2^12);
-		Power = Voltage*Current;
-		return Power;
-	}
-
-	// IsCharging indicates whether charging has started
-	bool Charger::IsCharging() {
-		return charging;
-	}
-
-	// DetectLoad will send out a pulse and measure the response of the sensor
-	bool Charger::DetectLoad() {
-		return true;
-	}
-=======
 	 // Wait for A/D conversion to complete
 	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
 
