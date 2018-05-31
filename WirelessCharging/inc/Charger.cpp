@@ -6,9 +6,7 @@
  */
 
 #include <Charger.h>
-#define 3V3 3.3
 
-// Charger is a class that performs hardware operations on the microcontroller
 Charger::Charger() {
 	// A/D CONVERTERS SETUP
 	Chip_ADC_Init(LPC_ADC, &ADCSetup);
@@ -29,8 +27,8 @@ Charger::Charger() {
 	charging = false;
 
 	// POWER CALCULATION PIN INITIALIZATION
-	Chip_IOCON_PinMux(LPC_IOCON, 0, 25, IOCON_MODE_INACT, IOCON_FUNC1);	// Select pin P0.25 in AD0.1
-	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE);					// Enable ADC channel 0
+	Chip_IOCON_PinMux(LPC_IOCON, 0, 25, IOCON_MODE_INACT, IOCON_FUNC1);	// Select pin P0.25 in AD0.2
+	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE);					// Enable ADC channel 2
 
 	Chip_IOCON_PinMux(LPC_IOCON, 0, 24, IOCON_MODE_INACT, IOCON_FUNC1);	// Select pin P0.24 in AD0.1
 	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH1, ENABLE);					// Enable ADC channel 1
@@ -51,8 +49,6 @@ Charger::Charger() {
 
 	// BOOST CONVERTER PWM CONTROL
 	Chip_IOCON_PinMux(LPC_IOCON, 2, 5, IOCON_MODE_INACT, IOCON_FUNC1); 	// Select pin P2.5 in PWM6 mode
-
-
 }
 
 // Enable starts the charger
@@ -73,26 +69,28 @@ void Charger::Disable() {
 	Board_LED_Set(0, false);
 }
 
-void Charger::CalculatePower() {
-	uint16_t dataCurrent;
+double Charger::GetPower() {
 	uint16_t dataVoltage;
+	uint16_t dataCurrent;
 
-	/* Waiting for A/D conversion complete */
-	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH0, ADC_DR_DONE_STAT) != SET) {}
-	/* Read ADC value */
-	Chip_ADC_ReadValue(LPC_ADC, ADC_CH0, &dataCurrent);
+	 // Wait for A/D conversion to complete
+	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
 
+	// Read the value of the ADC on CH2 into dataCurrent
+	Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &dataCurrent);
 
-	/* Waiting for A/D conversion complete */
+    // Wait for A/D conversion to complete
 	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
-	/* Read ADC value */
+
+	// Read the value of the ADC on CH1 into dataVoltage
 	Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataVoltage);
 
+    // Parse sensor readings
+	double V = (dataVoltage*3.3)/(2^12);
+	double I = (dataCurrent*3.3)/(2^12);
 
-	Voltage = (dataVoltage*3V3)/(2^12);
-	Current = (dateCurrent*3V3)/(2^12);
-	Power = Voltage*Current;
-	return Power;
+    // Return power
+	return V*I;
 }
 
 // IsCharging indicates whether charging has started
