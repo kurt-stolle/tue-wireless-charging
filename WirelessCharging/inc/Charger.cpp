@@ -6,12 +6,14 @@
  */
 
 #include <Charger.h>
+<<<<<<< HEAD
 #define 3V3 3.3
 static ADC_CLOCK_SETUP_T ADCSetup;
 static volatile uint8_t Burst_Mode_Flag = 0, Interrupt_Continue_Flag;
 
+=======
+>>>>>>> 302fedc0dbac74892c7b379d940789da33e892e1
 
-// Charger is a class that performs hardware operations on the microcontroller
 Charger::Charger() {
 	// A/D CONVERTERS SETUP
 	Chip_ADC_Init(LPC_ADC, &ADCSetup);
@@ -32,8 +34,8 @@ Charger::Charger() {
 	charging = false;
 
 	// POWER CALCULATION PIN INITIALIZATION
-	Chip_IOCON_PinMux(LPC_IOCON, 0, 25, IOCON_MODE_INACT, IOCON_FUNC1);	// Select pin P0.25 in AD0.1
-	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE);					// Enable ADC channel 0
+	Chip_IOCON_PinMux(LPC_IOCON, 0, 25, IOCON_MODE_INACT, IOCON_FUNC1);	// Select pin P0.25 in AD0.2
+	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE);					// Enable ADC channel 2
 
 	Chip_IOCON_PinMux(LPC_IOCON, 0, 24, IOCON_MODE_INACT, IOCON_FUNC1);	// Select pin P0.24 in AD0.1
 	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH1, ENABLE);					// Enable ADC channel 1
@@ -54,8 +56,6 @@ Charger::Charger() {
 
 	// BOOST CONVERTER PWM CONTROL
 	Chip_IOCON_PinMux(LPC_IOCON, 2, 5, IOCON_MODE_INACT, IOCON_FUNC1); 	// Select pin P2.5 in PWM6 mode
-
-
 }
 
 // Enable starts the charger
@@ -76,10 +76,11 @@ void Charger::Disable() {
 	Board_LED_Set(0, false);
 }
 
-void Charger::CalculatePower() {
-	uint16_t dataCurrent;
+double Charger::GetPower() {
 	uint16_t dataVoltage;
+	uint16_t dataCurrent;
 
+<<<<<<< HEAD
 	if (Burst_Mode_Flag) {
 		Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
 	}
@@ -120,3 +121,34 @@ void Charger::CalculatePower() {
 	bool Charger::DetectLoad() {
 		return true;
 	}
+=======
+	 // Wait for A/D conversion to complete
+	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
+
+	// Read the value of the ADC on CH2 into dataCurrent
+	Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &dataCurrent);
+
+    // Wait for A/D conversion to complete
+	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
+
+	// Read the value of the ADC on CH1 into dataVoltage
+	Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataVoltage);
+
+    // Parse sensor readings
+	double V = (dataVoltage*3.3)/(2^12);
+	double I = (dataCurrent*3.3)/(2^12);
+
+    // Return power
+	return V*I;
+}
+
+// IsCharging indicates whether charging has started
+bool Charger::IsCharging() {
+	return charging;
+}
+
+// DetectLoad will send out a pulse and measure the response of the sensor
+bool Charger::DetectLoad() {
+	return true;
+}
+>>>>>>> 302fedc0dbac74892c7b379d940789da33e892e1

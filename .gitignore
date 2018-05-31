@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+WirelessCharging/.idea
+WirelessCharging/Debug

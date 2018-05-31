@@ -33,11 +33,12 @@ typedef struct {
   __IO uint32_t LER;
 } LPC_PWM_T;
 
-// Cast the region of memory to the LPC_PWM_% type
-#define LPC_PWM1  ((LPC_PWM_T*) LPC_PWM1_BASE)
-#define ADC_BITRATE 2000000
-#define PWM_CYCLE_TIME 100
 
+#define LPC_PWM1  ((LPC_PWM_T*) LPC_PWM1_BASE)  // Cast the region of memory to our LPC_PWM_T type
+#define ADC_BITRATE 2000000                     // ADC bitrate
+#define PWM_CYCLE_TIME 100                      // PWM cycle time
+
+// Charger is a class that performs hardware operations on the microcontroller
 class Charger {
  public:
   // Constructor
@@ -46,17 +47,14 @@ class Charger {
   // Programming interface
   void Enable();
   void Disable();
-
-  void CalculatePower();
-
+  double GetPower();
   bool IsCharging();
-
   bool DetectLoad();
  private:
   // State
   bool charging;
 
-  // Analog-to-Digital Converter
+  // Analog-to-Digital Converter setup
   ADC_CLOCK_SETUP_T ADCSetup;
 
 };
