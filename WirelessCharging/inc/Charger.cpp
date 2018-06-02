@@ -33,14 +33,14 @@ Charger::Charger() {
 	charging = false;
 
 	// POWER CALCULATION PIN INITIALIZATION
-	Chip_IOCON_PinMux(LPC_IOCON, 0, 25, IOCON_MODE_INACT, IOCON_FUNC1);    // Select pin P0.25 in AD0.2
-	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE);                    // Enable ADC channel 2
-
-	Chip_IOCON_PinMux(LPC_IOCON, 0, 24, IOCON_MODE_INACT, IOCON_FUNC1);    // Select pin P0.24 in AD0.1
+	Chip_IOCON_PinMux(LPC_IOCON, 0, 24, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.24 in AD0.1
 	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH1, ENABLE);                    // Enable ADC channel 1
 
+	Chip_IOCON_PinMux(LPC_IOCON, 0, 25, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.25 in AD0.2
+	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE);                    // Enable ADC channel 2
+
 	// LOAD DETECTION PIN INITIALIZATION
-	Chip_IOCON_PinMux(LPC_IOCON, 0, 23, IOCON_MODE_INACT, IOCON_FUNC1);    // Select pin P0.23 in AD0.0
+	Chip_IOCON_PinMux(LPC_IOCON, 0, 23, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.23 in AD0.0
 	Chip_ADC_EnableChannel(LPC_ADC, ADC_CH0, ENABLE);                    // Enable ADC channel 0
 
 	// INVERTER PWM SIGNALS SETUP AND PIN INITIALIZATION
@@ -55,7 +55,7 @@ Charger::Charger() {
 // StopCharging starts the charger
 void Charger::StopCharging() {
 	// Set the charging flag
-	charging = true;
+	charging = false;
 
   	// Set the duty cycle of the PWM going to the boost converter to 0
   	SetBoostConverterDutyCycle(0.0f);
@@ -66,8 +66,8 @@ void Charger::StopCharging() {
 
 // StartCharging stops the charger
 void Charger::StartCharging() {
-	// Disable charging flag
-	charging = false;
+	// Set the charging flag
+	charging = true;
 
   	// Set the duty cycle of the PWM going to the boost converter to 0.5
   	SetBoostConverterDutyCycle(0.5f);
@@ -82,8 +82,8 @@ double Charger::GetPower() {
 	}
 
   	// Allocate variables to read into
-	uint16_t dataVoltage;
-	uint16_t dataCurrent;
+  	uint16_t dataCurrent;
+  	uint16_t dataVoltage;
 
 	// Enable burst mode - start conversions
 	Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
@@ -104,8 +104,8 @@ double Charger::GetPower() {
 	Chip_ADC_SetBurstCmd(LPC_ADC, DISABLE);
 
   	// Parse sensor readings: 3V3 * data/2^12
-	double V = 3.3 * dataVoltage/4069;
-	double I = 3.3 * dataCurrent/4069;
+	double V = (dataVoltage * 3.3)/ 4096.0;
+	double I = (dataCurrent * 3.3)/ 4096.0;
 
   	// TODO: I is the voltage from the current sensor, not the actual value for I. Figure out the ratio.
 
