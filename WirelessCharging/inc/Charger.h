@@ -53,7 +53,8 @@ class Charger {
  private:
   // Constants
   const uint16_t PWMCycleTime = (uint16_t) 400;
-  const uint16_t ADCBitrate = (uint16_t) 100000;
+  const uint16_t ADCBitrate = (uint16_t) 120000;
+  const uint16_t powerMeasurementAverages = 40;
 
   // PWM driver
   volatile pwm_t* PWM;
