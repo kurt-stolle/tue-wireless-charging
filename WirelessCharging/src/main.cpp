@@ -22,8 +22,12 @@ int main(void) {
 		if (c->IsLoadPresent()) {
 			c->StartCharging(); // Start charging if a load is found
 
+			while(1){
 			double p = c->GetPower();
-
+			//To do: make calculation as to which value the duty cycle has to go
+			//To do: change duty cycle
+			//To do: check whether load is still there
+			}
 
 		} else if (c->IsCharging()) {
 			c->StopCharging(); // Stop charging if no load is found
