@@ -24,11 +24,15 @@ int main(void) {
 
 			while(1){
 			double p = c->GetPower();
-			//To do: make calculation as to which value the duty cycle has to go
-			//To do: change duty cycle
+
+			if (){//to do:add condition for a lower duty cycle
+				//to do: decrease duty cycle
+			}
+			else if(){//to do:add condition for a higher duty cycle
+				//To do: increase duty cycle
+				}
 			//To do: check whether load is still there
 			}
-
 		} else if (c->IsCharging()) {
 			c->StopCharging(); // Stop charging if no load is found
 		}
