@@ -10,7 +10,8 @@
 #ifndef CHARGER_H_
 #define CHARGER_H_
 
-// Define the memory layout of the PWM region
+// Define the memory layout of the PWM
+// Nice tutorial for PWM setup: https://exploreembedded.com/wiki/LPC1768:_PWM
 typedef struct {
   __IO uint32_t IR;
   __IO uint32_t TCR;
@@ -30,35 +31,26 @@ typedef struct {
   __IO uint32_t MR6;
   __IO uint32_t PCR;
   __IO uint32_t LER;
-} pwm_t;
+} LPC_PWM_T;
 
-// Charger is a class that performs hardware operations on the MC
+
+#define LPC_PWM1  ((LPC_PWM_T*) LPC_PWM1_BASE)  // Cast the region of memory to our LPC_PWM_T type
+#define ADC_BITRATE 100000                     // ADC bitrate
+#define PWM_CYCLE_TIME 400                      // PWM cycle time
+
+// Charger is a class that performs hardware operations on the microcontroller
 class Charger {
  public:
   // Constructor
   Charger();
 
   // Programming interface
-  void StartCharging();
-  void StopCharging();
-
-
-  bool IsCharging();
-  bool IsLoadPresent();
-
-  void SetInverterDutyCycle(float ratio);
-  void SetBoostConverterDutyCycle(float ratio);
-
+  void Enable();
+  void Disable();
   double GetPower();
+  bool IsCharging();
+  bool DetectLoad();
  private:
-  // Constants
-  const uint16_t PWMCycleTime = (uint16_t) 400;
-  const uint16_t ADCBitrate = (uint16_t) 120000;
-  const uint16_t powerMeasurementAverages = 40;
-
-  // PWM driver
-  volatile pwm_t* PWM;
-
   // State
   bool charging;
 

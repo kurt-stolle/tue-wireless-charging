@@ -10,6 +10,7 @@ CPP_SRCS += \
 
 C_SRCS += \
 ../src/crp.c \
+../src/pwm_17xx_40xx.c \
 ../src/sysinit.c 
 
 OBJS += \
@@ -17,6 +18,7 @@ OBJS += \
 ./src/cr_startup_lpc175x_6x.o \
 ./src/crp.o \
 ./src/main.o \
+./src/pwm_17xx_40xx.o \
 ./src/sysinit.o 
 
 CPP_DEPS += \
@@ -26,6 +28,7 @@ CPP_DEPS += \
 
 C_DEPS += \
 ./src/crp.d \
+./src/pwm_17xx_40xx.d \
 ./src/sysinit.d 
 
 
