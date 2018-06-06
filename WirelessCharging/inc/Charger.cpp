@@ -5,13 +5,8 @@
  *      Author: kurts
  */
 
-<<<<<<< HEAD
+
 #include <Charger.h>
-#define 3V3 3.3
-static ADC_CLOCK_SETUP_T ADCSetup;
-static volatile uint8_t Burst_Mode_Flag = 0, Interrupt_Continue_Flag;
-
-
 
 
 // Constructor
