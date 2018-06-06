@@ -12,9 +12,7 @@ static ADC_CLOCK_SETUP_T ADCSetup;
 static volatile uint8_t Burst_Mode_Flag = 0, Interrupt_Continue_Flag;
 
 
-=======
-#include "Charger.h"
->>>>>>> 8df89b628b6838af94b316626df34bad6bbd7984
+
 
 // Constructor
 Charger::Charger() {
@@ -59,7 +57,7 @@ Charger::Charger() {
   Chip_IOCON_PinMux(LPC_IOCON, 2, 5, IOCON_MODE_INACT, IOCON_FUNC1);    // Select pin P2.5 in PWM6 mode
 }
 
-// StopCharging starts the charger
+ //StopCharging starts the charger
 void Charger::StopCharging() {
   // Set the charging flag
   charging = false;
@@ -100,18 +98,12 @@ double Charger::GetPower() {
   for (uint16_t i = 0; i < powerMeasurementAverages; i++){
     while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
 
-<<<<<<< HEAD
-	// Enable burst mode
-	Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
 
-	 // Wait for A/D conversion to complete
-	while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
-=======
     // Read the value of the ADC on CH2
     Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &temp);
     dataCurrent += temp;
 
->>>>>>> 8df89b628b6838af94b316626df34bad6bbd7984
+
 
     // Wait for A/D conversion to complete on CH1
     while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
@@ -128,15 +120,10 @@ double Charger::GetPower() {
   dataCurrent/=powerMeasurementAverages;
   dataVoltage/=powerMeasurementAverages;
 
-<<<<<<< HEAD
-    // Parse sensor readings
-	double V = (dataVoltage*3V3)/(4096);
-	double I = (dataCurrent*3V3)/(4096);
-=======
+
   // Parse sensor readings: 3V3 * data/2^12
   double V = (dataVoltage * 3.3) / 4096.0;
   V *= 2; // Scale of actual voltage level
->>>>>>> 8df89b628b6838af94b316626df34bad6bbd7984
 
   double I = (dataCurrent * 3.3) / 4096.0;
   I -= 2.5; // Offset of 2.5
