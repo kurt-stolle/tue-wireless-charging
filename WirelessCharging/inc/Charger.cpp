@@ -80,6 +80,7 @@ void Charger::StartCharging() {
 
   // Set the duty cycle of the PWM going to the boost converter to 0.5
   SetBoostConverterDutyCycle(0.5f);
+  SetInverterDutyCycle(0.4f); //initial value to start dc/ac conversion
 
   // Disable LED indicator
   Board_LED_Set(0, true);
@@ -149,6 +150,14 @@ bool Charger::IsLoadPresent() {
   return true;
 }
 
+float Charger::GetInverterDutyCycle(){
+	return (float) PWM->MR2 / PWM->MR0;
+}
+
+float Charger::GetBoostConverterDutyCycle(){
+
+	return (float) PWM->MR6 / PWM->MR0;
+}
 // SetInverterDutyCycle sets the duty cycle of the double PWM signal that should be wired to the inverter
 void Charger::SetInverterDutyCycle(float ratio) {
   PWM->MR1 = 0;                                    // PWM2 set at 0

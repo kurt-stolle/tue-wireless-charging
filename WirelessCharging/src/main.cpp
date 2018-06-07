@@ -12,6 +12,8 @@ int main(void) {
 
 	// Start an infinite loop
 	// One iteration of this loop can be viewed graphically in the provided flowchart
+	double p_old;
+
   	volatile static int i;
 	while (1) {
 		// Measure the
@@ -19,22 +21,25 @@ int main(void) {
 		if (c->IsLoadPresent()) {
 		  	if (!c->IsCharging()){
 			  c->StartCharging(); // Start charging if a load is found and not already charging
+			  for(; i < 200000; i++){ //wait one second
 
+			  }
+			  p_old = c->GetPower();
 			}
-
 		  	for (int a=0; a<10; a++){
-			  double p = c->GetPower();
-
-			  if (false){//to do:add condition for a lower duty cycle
-				//to do: decrease duty cycle
-				c->SetInverterDutyCycle(0.4f);
-			  }
-			  else if(false){//to do:add condition for a higher duty cycle
-				//To do: increase duty cycle
-				c->SetInverterDutyCycle(0.4f);
-			  }
-			}
-
+		  		double p = c->GetPower();
+		  		if(p != p_old){//condition for a lower duty cycle
+		  			if (p_old > p){
+		  				c->SetBoostConverterDutyCycle(c->GetBoostConverterDutyCycle() - 0.05f);
+		  			}
+		  			else if(p > p_old){
+		  				if(c->GetBoostConverterDutyCycle() < 0.9f){
+		  				c->SetBoostConverterDutyCycle(c->GetBoostConverterDutyCycle() + 0.05f);
+		  				}
+		  			}
+		  		}
+		  		p_old = p;
+		  	}
 
 		} else if (c->IsCharging()) {
 			c->StopCharging(); // Stop charging if no load is found

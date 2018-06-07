@@ -46,6 +46,9 @@ class Charger {
   bool IsCharging();
   bool IsLoadPresent();
 
+  float GetInverterDutyCycle();
+  float GetBoostConverterDutyCycle();
+
   void SetInverterDutyCycle(float ratio);
   void SetBoostConverterDutyCycle(float ratio);
 
