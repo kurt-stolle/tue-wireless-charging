@@ -84,7 +84,10 @@ void Charger::StartCharging() {
   SetInverterDutyCycle(0.4f); //initial value to start dc/ac conversion
 
   // Disable LED indicator
-  Board_LED_Set(0, true);
+  Board_LED_Set(0, true)
+
+  // Allow some settling time
+  for(int i=0; i < CPUFrequency * 1; i++){}
 }
 
 double Charger::GetPower() {

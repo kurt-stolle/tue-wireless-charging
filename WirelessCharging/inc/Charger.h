@@ -63,6 +63,7 @@ class Charger {
   const uint16_t PWMLatchEnable = (uint16_t) (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6); // MR0-6
   const uint16_t ADCBitrate = (uint16_t) 120000; // Bitrate of the ADC in Hz
   const uint16_t powerMeasurementAverages = 20;	 // How many ADC measurements do we take before we 'trust' the result?
+  const int CPUFrequency = 120000000; // 120 MHz
 
   // PWM driver, should point to a region in memory
   volatile pwm_t* PWM;
