@@ -38,6 +38,7 @@ Charger::Charger() {
 // Initialize ADC
 void Charger::initPWM(){
   Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_PWM1);            // Enable clock
+  Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ADC);
 
   PWM = ((pwm_t *) LPC_PWM1_BASE);                            // Cast region on memory to pwm_t pointer
   PWM->TCR |= 1 << 0;                                         // Timer enable bit
