@@ -42,7 +42,6 @@ class Charger {
   void StartCharging();
   void StopCharging();
 
-
   bool IsCharging();
   bool IsLoadPresent();
 
@@ -52,16 +51,16 @@ class Charger {
   void SetInverterDutyCycle(float ratio);
   void SetBoostConverterDutyCycle(float ratio);
 
-  double GetPower();
+  void GetVI(double*,double*);
  private:
   // Initialization
   void initPWM();
   void initADC();
 
   // Constants
-  const uint16_t PWMCycleTime = (uint16_t) 400; // Cycle time of the PWM, 400 = 60Hz.
+  const uint16_t PWMCycleTime = (uint16_t) 400 * 45/60; // Cycle time of the PWM, 400 = 60kHz.
   const uint16_t PWMLatchEnable = (uint16_t) (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6); // MR0-6
-  const uint16_t ADCBitrate = (uint16_t) 120000; // Bitrate of the ADC in Hz
+  const uint16_t ADCBitrate = (uint16_t) 100000; // Bitrate of the ADC in Hz
   const uint16_t powerMeasurementAverages = 20;	 // How many ADC measurements do we take before we 'trust' the result?
   const int CPUFrequency = 120000000; // 120 MHz
 

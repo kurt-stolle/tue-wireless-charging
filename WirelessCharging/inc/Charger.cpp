@@ -35,31 +35,33 @@ Charger::Charger() {
   StopCharging();
 }
 
-// Initialize ADC
+// Initialize PWM
 void Charger::initPWM(){
-  Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_PWM1);            // Enable clock
-  Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ADC);
+  Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_PWM1);
 
-  PWM = ((pwm_t *) LPC_PWM1_BASE);                            // Cast region on memory to pwm_t pointer
-  PWM->TCR |= 1 << 0;                                         // Timer enable bit
-  PWM->TCR |= 1 << 3;                                         // PWM enable bit
+  PWM = ((pwm_t *) LPC_PWM1_BASE);                  // Cast region on memory to pwm_t pointer
+  PWM->TCR |= 1 << 0;                               // Timer enable bit
+  PWM->TCR |= 1 << 3;                               // PWM enable bit
 
-  PWM->PCR = 0x0;                                             // All zeros
-  PWM->PCR |= (1 << 2) | (1 << 4) | (1 << 6);                 // Enable double-edged mode on PWM 2,4 and 6
-  PWM->PCR |= (1 << 10) | (1 << 12) | (1 << 14);              // Enable PWM 2,4 and 6
+  PWM->PCR = 0x0;                                  // All zeros
+  PWM->PCR |= (1 << 2) | (1 << 4) | (1 << 6);      // Enable double-edged mode on PWM 2,4 and 6
+  PWM->PCR |= (1 << 10) | (1 << 12) | (1 << 14);   // Enable PWM 2,4 and 6
 
-  PWM->MR0 = PWMCycleTime;                                    // PWM time to 100
-  PWM->LER = PWMLatchEnable;                                  // Push new MR0 value
+  PWM->MR0 = PWMCycleTime;                         // PWM time to 100
+  PWM->LER = PWMLatchEnable;                       // Push new MR0 value
 }
 
-// Initialize PWM
+// Initialize ADC
 void Charger::initADC(){
+  Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ADC);
+
+  // Enable channels
   Chip_ADC_Init(LPC_ADC, &ADCSetup);
   Chip_ADC_SetSampleRate(LPC_ADC, &ADCSetup, ADCBitrate);
   Chip_ADC_SetStartMode(LPC_ADC, ADC_NO_START, ADC_TRIGGERMODE_RISING); // Must be set for burst mode readings
-  Chip_ADC_EnableChannel(LPC_ADC, ADC_CH0, ENABLE);
-  Chip_ADC_EnableChannel(LPC_ADC, ADC_CH1, ENABLE);
-  Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE);
+  Chip_ADC_EnableChannel(LPC_ADC, ADC_CH0, ENABLE); // Load detect
+  Chip_ADC_EnableChannel(LPC_ADC, ADC_CH1, ENABLE); // V
+  Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE); // I
 }
 
  //StopCharging starts the charger
@@ -90,9 +92,11 @@ void Charger::StartCharging() {
   for(int i=0; i < CPUFrequency * 1; i++){}
 }
 
-double Charger::GetPower() {
+void Charger::GetVI(double* V, double* I) {
   if (!IsCharging()) {
-	return 0;
+	*I = 0;
+	*V = 0;
+	return;
   }
 
   // Allocate variables to read into
@@ -108,12 +112,9 @@ double Charger::GetPower() {
   for (uint16_t i = 0; i < powerMeasurementAverages; i++){
     while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
 
-
     // Read the value of the ADC on CH2
     Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &temp);
     dataCurrent += temp;
-
-
 
     // Wait for A/D conversion to complete on CH1
     while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
@@ -132,15 +133,12 @@ double Charger::GetPower() {
 
 
   // Parse sensor readings: 3V3 * data/2^12
-  double V = (dataVoltage * 3.3) / 4096.0;
-  V *= 70.0/3.3; // Voltage is scaled down from 70V to 3V3
+  *V = (dataVoltage * 3.3) / 4096.0;
+  *V *= 70.0/3.3; // Voltage is scaled down from 70V to 3V3
 
-  double I = (dataCurrent * 3.3) / 4096.0;
-  I -= 2.5; // Offset of 2.5
-  I /= 0.04; // 40mV/A
-
-  // Return power
-  return V * I;
+  *I = (dataCurrent * 3.3) / 4096.0;
+  *I -= 2.5; // Offset of 2.5
+  *I /= 0.04; // 40mV/A
 }
 
 // IsCharging indicates whether charging has started
@@ -150,7 +148,6 @@ bool Charger::IsCharging() {
 
 // DetectLoad will send out a pulse and measure the response of the sensor
 bool Charger::IsLoadPresent() {
-
   return true;
 }
 

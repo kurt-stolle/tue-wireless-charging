@@ -1,6 +1,9 @@
 // Includes
 #include "charger.h"
 
+// Charger class
+static Charger* c;
+
 // Main function
 int main(void) {
   // REQUIRED SETUP
@@ -8,7 +11,7 @@ int main(void) {
   Board_Init();
 
   // Initialize the charger
-  volatile static auto c = new Charger();
+  c = new Charger();
 
   // Start an infinite loop
   // One iteration of this loop can be viewed graphically in the provided flowchart
@@ -24,8 +27,11 @@ int main(void) {
 
 	  // Perform some iterations the MPPT algorithm
 	  for (int a = 0; a < 10; a++) {
-		double measure = c->GetPower();
-		if (measure < power) {
+		double I,V;
+		c->GetVI(&I,&V);
+
+		double measure = V*I;
+		if (measure < power || V > 60) {
 		  c->SetBoostConverterDutyCycle(c->GetBoostConverterDutyCycle() - 0.05f);
 		} else if (measure > power) {
 		  if (c->GetBoostConverterDutyCycle() < 0.9f) {
