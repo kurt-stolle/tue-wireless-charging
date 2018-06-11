@@ -86,10 +86,10 @@ void Charger::StartCharging() {
   SetInverterDutyCycle(0.4f); //initial value to start dc/ac conversion
 
   // Disable LED indicator
-  Board_LED_Set(0, true)
+  Board_LED_Set(0, true);
 
   // Allow some settling time
-  for(int i=0; i < CPUFrequency * 1; i++){}
+  for(int i=0; i < CPUFrequency / 100; i++){}
 }
 
 void Charger::GetVI(double* V, double* I) {
@@ -101,8 +101,8 @@ void Charger::GetVI(double* V, double* I) {
 
   // Allocate variables to read into
   uint16_t temp;
-  uint16_t dataCurrent = 0;
-  uint16_t dataVoltage = 0;
+  uint32_t dataCurrent = 0;
+  uint32_t dataVoltage = 0;
 
   // Enable burst mode - start conversions
   Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
@@ -110,21 +110,21 @@ void Charger::GetVI(double* V, double* I) {
   // Wait for A/D conversion to complete on CH2
   // One measurement takes 64 cycles
   for (uint16_t i = 0; i < powerMeasurementAverages; i++){
-    while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
-
-    // Read the value of the ADC on CH2
-    Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &temp);
-    dataCurrent += temp;
-
     // Wait for A/D conversion to complete on CH1
     while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
 
     // Read the value of the ADC on CH1
     Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &temp);
-    dataVoltage += temp;
+    dataVoltage += (uint32_t) temp;
+
+    while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
+
+    // Read the value of the ADC on CH2
+    Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &temp);
+    dataCurrent += (uint32_t) temp;
   }
 
-  // Disable burst mode - stop reading
+  // Disable burst mode
   Chip_ADC_SetBurstCmd(LPC_ADC, DISABLE);
 
   // Take the average value
@@ -152,15 +152,16 @@ bool Charger::IsLoadPresent() {
 }
 
 float Charger::GetInverterDutyCycle(){
-	return (float) PWM->MR2 / PWM->MR0;
+	return dutyInverter;
 }
 
 float Charger::GetBoostConverterDutyCycle(){
-
-	return (float) PWM->MR6 / PWM->MR0;
+	return dutyBoost;
 }
 // SetInverterDutyCycle sets the duty cycle of the double PWM signal that should be wired to the inverter
 void Charger::SetInverterDutyCycle(float ratio) {
+dutyInverter = ratio;
+
   PWM->MR1 = 0;                                    // PWM2 set at 0
   PWM->MR2 = (uint32_t) (PWMCycleTime * ratio);    // PWM2 reset
   PWM->MR3 = (uint32_t) (PWMCycleTime * ratio);    // PWM4 set
@@ -170,6 +171,8 @@ void Charger::SetInverterDutyCycle(float ratio) {
 
 // SetBoostConverterDutyCycle sets the duty cycle of the PWM signal that should be wired to the boost converter
 void Charger::SetBoostConverterDutyCycle(float ratio) {
+	dutyBoost = ratio;
+
   PWM->MR5 = 0;                                    // PWM6 set at 0
   PWM->MR6 = (uint32_t) (PWMCycleTime * ratio);    // PWM6 reset
   PWM->LER = PWMLatchEnable;                       // Push new MR5-6 values

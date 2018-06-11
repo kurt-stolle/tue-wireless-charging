@@ -58,11 +58,14 @@ class Charger {
   void initADC();
 
   // Constants
-  const uint16_t PWMCycleTime = (uint16_t) 400 * 45/60; // Cycle time of the PWM, 400 = 60kHz.
+  const uint16_t PWMCycleTime = (uint16_t) 400 * 60/45; // Cycle time of the PWM, 400 = 60kHz.
   const uint16_t PWMLatchEnable = (uint16_t) (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6); // MR0-6
-  const uint16_t ADCBitrate = (uint16_t) 100000; // Bitrate of the ADC in Hz
-  const uint16_t powerMeasurementAverages = 20;	 // How many ADC measurements do we take before we 'trust' the result?
+  const uint16_t ADCBitrate = (uint16_t) 180000; // Bitrate of the ADC in Hz
+  const uint16_t powerMeasurementAverages = 200;	 // How many ADC measurements do we take before we 'trust' the result?
   const int CPUFrequency = 120000000; // 120 MHz
+
+  // Save duty cycles
+  float dutyInverter, dutyBoost = 0;
 
   // PWM driver, should point to a region in memory
   volatile pwm_t* PWM;

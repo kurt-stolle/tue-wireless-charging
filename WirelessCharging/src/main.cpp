@@ -1,5 +1,6 @@
 // Includes
 #include "charger.h"
+#include <stdio.h>
 
 // Charger class
 static Charger* c;
@@ -10,13 +11,17 @@ int main(void) {
   SystemCoreClockUpdate();
   Board_Init();
 
+
+  // Print something
+  printf("Initializing Charger");
+
+
   // Initialize the charger
   c = new Charger();
 
   // Start an infinite loop
   // One iteration of this loop can be viewed graphically in the provided flowchart
   double power = 0.0;
-  volatile static int i;
   for (;;) {
 	// Check whether a load is present
 	if (c->IsLoadPresent()) {
@@ -25,18 +30,20 @@ int main(void) {
 		c->StartCharging();
 	  }
 
+	  // Debug print
+	  printf("Load is present, resuming MPPT");
+
 	  // Perform some iterations the MPPT algorithm
 	  for (int a = 0; a < 10; a++) {
 		double I,V;
-		c->GetVI(&I,&V);
+		c->GetVI(&V,&I);
 
 		double measure = V*I;
-		if (measure < power || V > 60) {
-		  c->SetBoostConverterDutyCycle(c->GetBoostConverterDutyCycle() - 0.05f);
-		} else if (measure > power) {
-		  if (c->GetBoostConverterDutyCycle() < 0.9f) {
-			c->SetBoostConverterDutyCycle(c->GetBoostConverterDutyCycle() + 0.05f);
-		  }
+		float cycle = c->GetBoostConverterDutyCycle();
+		if (measure < power) {
+		  c->SetBoostConverterDutyCycle(cycle - 0.01f);
+		} else if (measure > power && V < 60 && c->GetBoostConverterDutyCycle() < 0.9f) {
+			c->SetBoostConverterDutyCycle(cycle + 0.01f);
 		}
 		power = measure; // Save this for next iteration
 	  }
@@ -44,9 +51,6 @@ int main(void) {
 	} else if (c->IsCharging()) {
 	  c->StopCharging(); // Stop charging if no load is found
 	}
-
-	// Prevent optimization
-	i++;
   }
 
   // Exit without error
