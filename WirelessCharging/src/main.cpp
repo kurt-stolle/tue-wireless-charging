@@ -42,7 +42,7 @@ int main(void) {
 		float cycle = c->GetBoostConverterDutyCycle();
 		if (measure < power) {
 		  c->SetBoostConverterDutyCycle(cycle - 0.01f);
-		} else if (measure > power && V < 60 && c->GetBoostConverterDutyCycle() < 0.9f) {
+		} else if (measure > power && V < 60 && c->GetBoostConverterDutyCycle() < 0.9f && I < 10) {
 			c->SetBoostConverterDutyCycle(cycle + 0.01f);
 		}
 		power = measure; // Save this for next iteration

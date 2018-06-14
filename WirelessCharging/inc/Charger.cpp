@@ -26,7 +26,7 @@ Charger::Charger() {
   // Inverter pins
   Chip_IOCON_PinMux(LPC_IOCON, 2, 1, IOCON_MODE_INACT, IOCON_FUNC1);  // Select pin P2.1 in PWM2 mode
   Chip_IOCON_PinMux(LPC_IOCON, 2, 3, IOCON_MODE_INACT, IOCON_FUNC1);  // Select pin P2.3 in PWM4 mode
-  SetInverterDutyCycle(0.4f);
+  SetInverterDutyCycle(0.5f);
 
   // Boost converter pin
   Chip_IOCON_PinMux(LPC_IOCON, 2, 5, IOCON_MODE_INACT, IOCON_FUNC1);    // Select pin P2.5 in PWM6 mode
@@ -83,7 +83,7 @@ void Charger::StartCharging() {
 
   // Set the duty cycle of the PWM going to the boost converter to 0.5
   SetBoostConverterDutyCycle(0.5f);
-  SetInverterDutyCycle(0.4f); //initial value to start dc/ac conversion
+  SetInverterDutyCycle(0.5f); //initial value to start dc/ac conversion
 
   // Disable LED indicator
   Board_LED_Set(0, true);
@@ -163,9 +163,9 @@ void Charger::SetInverterDutyCycle(float ratio) {
 dutyInverter = ratio;
 
   PWM->MR1 = 0;                                    // PWM2 set at 0
-  PWM->MR2 = (uint32_t) (PWMCycleTime * ratio);    // PWM2 reset
-  PWM->MR3 = (uint32_t) (PWMCycleTime * ratio);    // PWM4 set
-  PWM->MR4 = PWMCycleTime;                         // PWM4 reset at T-1
+  PWM->MR2 = (uint32_t) (PWMCycleTime * (ratio - 0.01));    // PWM2 reset
+  PWM->MR3 = (uint32_t) (PWMCycleTime * (ratio));    // PWM4 set
+  PWM->MR4 = (uint32_t) PWMCycleTime * (1 - 0.01);                         // PWM4 reset at T-1
   PWM->LER = PWMLatchEnable;                       // Push new MR1-4 values
 }
 
