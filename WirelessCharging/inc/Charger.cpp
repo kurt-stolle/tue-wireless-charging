@@ -47,7 +47,7 @@ void Charger::initPWM(){
   PWM->PCR |= (1 << 2) | (1 << 4) | (1 << 6);      // Enable double-edged mode on PWM 2,4 and 6
   PWM->PCR |= (1 << 10) | (1 << 12) | (1 << 14);   // Enable PWM 2,4 and 6
 
-  PWM->MR0 = PWMCycleTime;                         // PWM time to 100
+  PWM->MR0 = (uint16_t) PWMCycleTime;                         // PWM time to 100
   PWM->LER = PWMLatchEnable;                       // Push new MR0 value
 }
 
@@ -87,9 +87,6 @@ void Charger::StartCharging() {
 
   // Disable LED indicator
   Board_LED_Set(0, true);
-
-  // Allow some settling time
-  for(int i=0; i < CPUFrequency / 100; i++){}
 }
 
 void Charger::GetVI(double* V, double* I) {
@@ -165,7 +162,7 @@ dutyInverter = ratio;
   PWM->MR1 = 0;                                    // PWM2 set at 0
   PWM->MR2 = (uint32_t) (PWMCycleTime * (ratio - 0.01));    // PWM2 reset with deadtime added
   PWM->MR3 = (uint32_t) (PWMCycleTime * (ratio));    // PWM4 set
-  PWM->MR4 = (uint32_t) PWMCycleTime * (1 - 0.01);                         // PWM4 reset at T-1 with deadtime added
+  PWM->MR4 = (uint32_t) (PWMCycleTime * (1 - 0.01));                         // PWM4 reset at T-1 with deadtime added
   PWM->LER = PWMLatchEnable;                       // Push new MR1-4 values
 }
 
