@@ -163,9 +163,9 @@ void Charger::SetInverterDutyCycle(float ratio) {
 dutyInverter = ratio;
 
   PWM->MR1 = 0;                                    // PWM2 set at 0
-  PWM->MR2 = (uint32_t) (PWMCycleTime * (ratio - 0.01));    // PWM2 reset
+  PWM->MR2 = (uint32_t) (PWMCycleTime * (ratio - 0.01));    // PWM2 reset with deadtime added
   PWM->MR3 = (uint32_t) (PWMCycleTime * (ratio));    // PWM4 set
-  PWM->MR4 = (uint32_t) PWMCycleTime * (1 - 0.01);                         // PWM4 reset at T-1
+  PWM->MR4 = (uint32_t) PWMCycleTime * (1 - 0.01);                         // PWM4 reset at T-1 with deadtime added
   PWM->LER = PWMLatchEnable;                       // Push new MR1-4 values
 }
 
