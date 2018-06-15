@@ -39,11 +39,11 @@ int main(void) {
 		c->GetVI(&V,&I);
 
 		double measure = V*I;
-		float cycle = c->GetBoostConverterDutyCycle();
+		//float cycle = c->GetBoostConverterDutyCycle();
 		if (measure < power) {
-		  c->SetBoostConverterDutyCycle(cycle - 0.01f);
+		//  c->SetBoostConverterDutyCycle(cycle - 0.01f);
 		} else if (measure > power && V < 60 && c->GetBoostConverterDutyCycle() < 0.9f && I < 10) {
-			c->SetBoostConverterDutyCycle(cycle + 0.01f);
+		//	c->SetBoostConverterDutyCycle(cycle + 0.01f);
 		}
 		power = measure; // Save this for next iteration
 	  }
