@@ -21,8 +21,9 @@ int main(void) {
 
   // Start an infinite loop
   // One iteration of this loop can be viewed graphically in the provided flowchart
+  volatile int i = 0;
   double power = 0.0;
-  for (;;) {
+  while(1) {
 	// Check whether a load is present
 	if (c->IsLoadPresent()) {
 	  // If a load is present and the device is not charging, then start charging
@@ -54,6 +55,9 @@ int main(void) {
 	} else if (c->IsCharging()) {
 	  c->StopCharging(); // Stop charging if no load is found
 	}
+
+	// Prevent optimization
+	i++;
   }
 
   // Exit without error
