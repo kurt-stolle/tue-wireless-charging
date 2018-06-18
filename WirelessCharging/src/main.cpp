@@ -2,9 +2,6 @@
 #include "charger.h"
 #include <stdio.h>
 
-// Charger class
-static Charger* c;
-
 // Main function
 int main(void) {
   // REQUIRED SETUP
@@ -17,11 +14,12 @@ int main(void) {
 
 
   // Initialize the charger
-  c = new Charger();
+  Charger* c = new Charger();
 
   // Start an infinite loop
   // One iteration of this loop can be viewed graphically in the provided flowchart
-  double power = 0.0;
+  double prevPower = 0.0;
+  double I, V;
   for (;;) {
 	// Check whether a load is present
 	if (c->IsLoadPresent()) {
@@ -30,26 +28,30 @@ int main(void) {
 		c->StartCharging();
 	  }
 
-	  // Debug print
-	  printf("Load is present, resuming MPPT");
+	  // Measure V and I from sensors
+	  c->GetVI(&V, &I);
 
-	  continue;
+	  // Calculate power V*I
+	  double power = V * I;
 
-	  // Perform some iterations the MPPT algorithm
-	  for (int a = 0; a < 10; a++) {
-		double I,V;
-		c->GetVI(&V,&I);
-
-		double measure = V*I;
-		float cycle = c->GetBoostConverterDutyCycle();
-		if (measure < power) {
-		  c->SetBoostConverterDutyCycle(cycle - 0.01f);
-		} else if (measure > power && V < 60 && c->GetBoostConverterDutyCycle() < 0.9f) {
-			c->SetBoostConverterDutyCycle(cycle + 0.01f);
-		}
-		power = measure; // Save this for next iteration
+	  // Fetch cycle from charger
+	  float cycle = c->GetBoostConverterDutyCycle();
+	  float cycleMax = (float) (1-(V/60));
+	  if (cycleMax > 0.9f) {
+		cycleMax = 0.9f;
 	  }
 
+	  // Decide whether to decrease, increase or keep cycle
+	  if (power < prevPower || I > 10 || V > 60) {
+		// Decrease duty cycle when power is less than previous power and when I or V is greater than 10 and 60 resp.
+		c->SetBoostConverterDutyCycle(cycle - 0.01f);
+	  } else if (power > prevPower && c->GetBoostConverterDutyCycle() < cycleMax){
+		// Increase duty cycle up to a limit of 0.9
+		c->SetBoostConverterDutyCycle(cycle + 0.01f);
+	  }
+
+	  // Save power for previous iteration
+	  prevPower = power;
 	} else if (c->IsCharging()) {
 	  c->StopCharging(); // Stop charging if no load is found
 	}

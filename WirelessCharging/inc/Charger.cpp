@@ -29,6 +29,9 @@ Charger::Charger() {
 
   // Initialize ADC
   initADC();
+
+  // Initialize GPIO
+  initGPIO();
 }
 
 // Initialize PWM
@@ -54,7 +57,7 @@ void Charger::initPWM(){
 
   // Best-guess vales for MPPT
   PWM->MR5 = 0;                                    // PWM6 set at 0
-  PWM->MR6 = (uint32_t) (PWMCycleTime * 0.5);    	// PWM6 reset
+  PWM->MR6 = (uint32_t) (PWMCycleTime * dutyBoost);    	// PWM6 reset
 
   // Trigger the latch enable, set MR values
   PWM->LER = PWMLatchEnable;                       // Push new MR0 value
@@ -64,6 +67,13 @@ void Charger::initPWM(){
 
   // Small delay to propagate changes
   Delay(10);
+}
+
+// Initialize GPIO
+void Charger::initGPIO(){
+  // Enable GPIO 0
+  Chip_GPIO_Init(LPC_GPIO);
+  Chip_GPIO_SetPinDIRInput(LPC_GPIO, 0, 0); // Set P0.0 as input
 }
 
 // Initialize ADC
@@ -85,7 +95,11 @@ void Charger::StopCharging() {
   charging = false;
 
   // Set the duty cycle of the PWM going to the boost converter to 0
-  SetBoostConverterDutyCycle(0.0f);
+   PWM->MR5 = 0;                // PWM6 set at 0
+   PWM->MR6 = 0;			    // PWM6 reset
+   PWM->LER = PWMLatchEnable;   // Push new MR5-6 values
+
+   Delay(10);
 
   // Enable the LED indicator
   Board_LED_Set(0, false);
@@ -96,8 +110,8 @@ void Charger::StartCharging() {
   // Set the charging flag
   charging = true;
 
-  // Set the duty cycle of the PWM going to the boost converter to 0.5
-  SetBoostConverterDutyCycle(0.5f);
+  // Re-set the duty cycle to the expected value
+  SetBoostConverterDutyCycle(dutyBoost);
 
   // Disable LED indicator
   Board_LED_Set(0, true);
@@ -159,7 +173,9 @@ bool Charger::IsCharging() {
 
 // DetectLoad will send out a pulse and measure the response of the sensor
 bool Charger::IsLoadPresent() {
-  return true;
+	bool loadPresent = Chip_GPIO_ReadPortBit(LPC_GPIO, 0, 0);
+
+  return loadPresent;
 }
 
 float Charger::GetBoostConverterDutyCycle(){
