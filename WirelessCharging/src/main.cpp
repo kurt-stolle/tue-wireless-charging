@@ -21,9 +21,8 @@ int main(void) {
 
   // Start an infinite loop
   // One iteration of this loop can be viewed graphically in the provided flowchart
-  volatile int i = 0;
   double power = 0.0;
-  while(1) {
+  for (;;) {
 	// Check whether a load is present
 	if (c->IsLoadPresent()) {
 	  // If a load is present and the device is not charging, then start charging
@@ -34,7 +33,6 @@ int main(void) {
 	  // Debug print
 	  printf("Load is present, resuming MPPT");
 
-	  // DISABLE MPPT FOR EXPERIMENT
 	  continue;
 
 	  // Perform some iterations the MPPT algorithm
@@ -45,8 +43,8 @@ int main(void) {
 		double measure = V*I;
 		float cycle = c->GetBoostConverterDutyCycle();
 		if (measure < power) {
-		  	c->SetBoostConverterDutyCycle(cycle - 0.01f);
-		} else if (measure > power && V < 60 && c->GetBoostConverterDutyCycle() < 0.9f && I < 10) {
+		  c->SetBoostConverterDutyCycle(cycle - 0.01f);
+		} else if (measure > power && V < 60 && c->GetBoostConverterDutyCycle() < 0.9f) {
 			c->SetBoostConverterDutyCycle(cycle + 0.01f);
 		}
 		power = measure; // Save this for next iteration
@@ -55,9 +53,6 @@ int main(void) {
 	} else if (c->IsCharging()) {
 	  c->StopCharging(); // Stop charging if no load is found
 	}
-
-	// Prevent optimization
-	i++;
   }
 
   // Exit without error

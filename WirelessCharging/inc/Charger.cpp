@@ -10,12 +10,6 @@
 
 // Constructor
 Charger::Charger() {
-	// Initialize PWM
-	initPWM();
-
-  // Initialize ADC
-  initADC();
-
   // Power calculation pins
   Chip_IOCON_PinMux(LPC_IOCON, 0, 24, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.24 in AD0.1
   Chip_IOCON_PinMux(LPC_IOCON, 0, 25, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.25 in AD0.2
@@ -30,15 +24,18 @@ Charger::Charger() {
   // Boost converter pin
   Chip_IOCON_PinMux(LPC_IOCON, 2, 5, IOCON_MODE_INACT, IOCON_FUNC1);    // Select pin P2.5 in PWM6 mode
 
-  // By default, do not charge
-  StopCharging();
+  // Initialize PWM
+  initPWM();
+
+  // Initialize ADC
+  initADC();
 }
 
 // Initialize PWM
 void Charger::initPWM(){
   Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_PWM1);
 
-  PWM->TCR |= (1 << 0) | (1 << 3);                               // Timer enable bit and PWM enable bit
+  PWM->TCR = (1 << 0) | (1 << 3);                               // Timer enable bit and PWM enable bit
 
   // No prescalar
   PWM->PR = 0x0;
@@ -57,7 +54,7 @@ void Charger::initPWM(){
 
   // Best-guess vales for MPPT
   PWM->MR5 = 0;                                    // PWM6 set at 0
-  PWM->MR6 = (uint32_t) (PWMCycleTime * 0.4);    	// PWM6 reset
+  PWM->MR6 = (uint32_t) (PWMCycleTime * 0.5);    	// PWM6 reset
 
   // Trigger the latch enable, set MR values
   PWM->LER = PWMLatchEnable;                       // Push new MR0 value
