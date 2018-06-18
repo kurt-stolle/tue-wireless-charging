@@ -10,11 +10,11 @@
 
 // Constructor
 Charger::Charger() {
+	// Initialize PWM
+	initPWM();
+
   // Initialize ADC
   initADC();
-
-  // Initialize PWM
-  initPWM();
 
   // Power calculation pins
   Chip_IOCON_PinMux(LPC_IOCON, 0, 24, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.24 in AD0.1
@@ -26,7 +26,6 @@ Charger::Charger() {
   // Inverter pins
   Chip_IOCON_PinMux(LPC_IOCON, 2, 1, IOCON_MODE_INACT, IOCON_FUNC1);  // Select pin P2.1 in PWM2 mode
   Chip_IOCON_PinMux(LPC_IOCON, 2, 3, IOCON_MODE_INACT, IOCON_FUNC1);  // Select pin P2.3 in PWM4 mode
-  SetInverterDutyCycle(0.5f);
 
   // Boost converter pin
   Chip_IOCON_PinMux(LPC_IOCON, 2, 5, IOCON_MODE_INACT, IOCON_FUNC1);    // Select pin P2.5 in PWM6 mode
@@ -39,21 +38,40 @@ Charger::Charger() {
 void Charger::initPWM(){
   Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_PWM1);
 
-  PWM = ((pwm_t *) LPC_PWM1_BASE);                  // Cast region on memory to pwm_t pointer
-  PWM->TCR |= 1 << 0;                               // Timer enable bit
-  PWM->TCR |= 1 << 3;                               // PWM enable bit
+  PWM->TCR |= (1 << 0) | (1 << 3);                               // Timer enable bit and PWM enable bit
 
-  PWM->PCR = 0x0;                                  // All zeros
-  PWM->PCR |= (1 << 2) | (1 << 4) | (1 << 6);      // Enable double-edged mode on PWM 2,4 and 6
-  PWM->PCR |= (1 << 10) | (1 << 12) | (1 << 14);   // Enable PWM 2,4 and 6
+  // No prescalar
+  PWM->PR = 0x0;
 
+  // Reset when TC matches MR0
+  PWM->MCR = (1 << 1);
+
+  // Set match registers
   PWM->MR0 = (uint16_t) PWMCycleTime;                         // PWM time to 100
+
+  // Set match registers for inverter
+  PWM->MR1 = 0;                                    // PWM2 set at 0
+  PWM->MR2 = (uint32_t) (PWMCycleTime * (0.475));    // PWM2 reset with deadtime added
+  PWM->MR3 = (uint32_t) (PWMCycleTime * (0.5));    // PWM4 set
+  PWM->MR4 = (uint32_t) (PWMCycleTime * (0.975));
+
+  // Best-guess vales for MPPT
+  PWM->MR5 = 0;                                    // PWM6 set at 0
+  PWM->MR6 = (uint32_t) (PWMCycleTime * 0.4);    	// PWM6 reset
+
+  // Trigger the latch enable, set MR values
   PWM->LER = PWMLatchEnable;                       // Push new MR0 value
+
+  // Enable PWM 2,4 and 6 and Enable double-edged mode on PWM 2,4 and 6
+  PWM->PCR = (1 << 2) | (1 << 4) | (1 << 6) | (1 << 10) | (1 << 12) | (1 << 14);
+
+  // Small delay to propagate changes
+  Delay(10);
 }
 
 // Initialize ADC
 void Charger::initADC(){
-  Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ADC);
+  //Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ADC);
 
   // Enable channels
   Chip_ADC_Init(LPC_ADC, &ADCSetup);
@@ -83,7 +101,6 @@ void Charger::StartCharging() {
 
   // Set the duty cycle of the PWM going to the boost converter to 0.5
   SetBoostConverterDutyCycle(0.5f);
-  SetInverterDutyCycle(0.5f); //initial value to start dc/ac conversion
 
   // Disable LED indicator
   Board_LED_Set(0, true);
@@ -148,22 +165,8 @@ bool Charger::IsLoadPresent() {
   return true;
 }
 
-float Charger::GetInverterDutyCycle(){
-	return dutyInverter;
-}
-
 float Charger::GetBoostConverterDutyCycle(){
 	return dutyBoost;
-}
-// SetInverterDutyCycle sets the duty cycle of the double PWM signal that should be wired to the inverter
-void Charger::SetInverterDutyCycle(float ratio) {
-dutyInverter = ratio;
-
-  PWM->MR1 = 0;                                    // PWM2 set at 0
-  PWM->MR2 = (uint32_t) (PWMCycleTime * (ratio - 0.01));    // PWM2 reset with deadtime added
-  PWM->MR3 = (uint32_t) (PWMCycleTime * (ratio));    // PWM4 set
-  PWM->MR4 = (uint32_t) (PWMCycleTime * (1 - 0.01));                         // PWM4 reset at T-1 with deadtime added
-  PWM->LER = PWMLatchEnable;                       // Push new MR1-4 values
 }
 
 // SetBoostConverterDutyCycle sets the duty cycle of the PWM signal that should be wired to the boost converter
@@ -173,5 +176,13 @@ void Charger::SetBoostConverterDutyCycle(float ratio) {
   PWM->MR5 = 0;                                    // PWM6 set at 0
   PWM->MR6 = (uint32_t) (PWMCycleTime * ratio);    // PWM6 reset
   PWM->LER = PWMLatchEnable;                       // Push new MR5-6 values
+
+  Delay(10);
 }
 
+// Delay will delay computation for a while
+void Charger::Delay(unsigned int ms){
+  unsigned int i,j;
+  for(i=0;i<ms;i++)
+	for(j=0;j<50000;j++);
+}

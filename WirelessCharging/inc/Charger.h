@@ -32,6 +32,9 @@ typedef struct {
   __IO uint32_t LER;
 } pwm_t;
 
+// Define region in memory of PWM driver
+#define PWM ((pwm_t *) LPC_PWM1_BASE)
+
 // Charger is a class that performs hardware operations on the MC
 class Charger {
  public:
@@ -45,13 +48,13 @@ class Charger {
   bool IsCharging();
   bool IsLoadPresent();
 
-  float GetInverterDutyCycle();
   float GetBoostConverterDutyCycle();
 
-  void SetInverterDutyCycle(float ratio);
   void SetBoostConverterDutyCycle(float ratio);
 
   void GetVI(double*,double*);
+
+  void Delay(unsigned int ms);
  private:
   // Initialization
   void initPWM();
@@ -66,9 +69,6 @@ class Charger {
 
   // Save duty cycles
   float dutyInverter, dutyBoost = 0;
-
-  // PWM driver, should point to a region in memory
-  volatile pwm_t* PWM;
 
   // State
   bool charging;
