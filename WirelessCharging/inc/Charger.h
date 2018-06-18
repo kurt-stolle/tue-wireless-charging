@@ -59,7 +59,6 @@ class Charger {
   // Initialization
   void initPWM();
   void initADC();
-  void initGPIO();
 
   // Constants
   const double PWMCycleTime = 400 * 60.0/45.3; // Cycle time of the PWM, 400 = 60kHz.

@@ -6,8 +6,6 @@
 int main(void) {
   // REQUIRED SETUP
   SystemCoreClockUpdate();
-  Board_Init();
-
 
   // Print something
   printf("Initializing Charger");

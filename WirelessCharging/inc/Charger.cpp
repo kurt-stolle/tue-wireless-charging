@@ -10,12 +10,16 @@
 
 // Constructor
 Charger::Charger() {
+  // Initialize board
+  Board_Init();
+
+  // Load detection pin
+  Chip_IOCON_PinMux(LPC_IOCON, 0, 0, IOCON_MODE_INACT, IOCON_FUNC0);
+  Chip_GPIO_SetPinDIRInput(LPC_GPIO, 0, 0); // Set P0.0 as input
+
   // Power calculation pins
   Chip_IOCON_PinMux(LPC_IOCON, 0, 24, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.24 in AD0.1
   Chip_IOCON_PinMux(LPC_IOCON, 0, 25, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.25 in AD0.2
-
-  // Load detection pin
-  Chip_IOCON_PinMux(LPC_IOCON, 0, 23, IOCON_MODE_PULLUP, IOCON_FUNC1);  // Select pin P0.23 in AD0.0
 
   // Inverter pins
   Chip_IOCON_PinMux(LPC_IOCON, 2, 1, IOCON_MODE_INACT, IOCON_FUNC1);  // Select pin P2.1 in PWM2 mode
@@ -30,12 +34,12 @@ Charger::Charger() {
   // Initialize ADC
   initADC();
 
-  // Initialize GPIO
-  initGPIO();
+  // Update clock
+  SystemCoreClockUpdate();
 }
 
 // Initialize PWM
-void Charger::initPWM(){
+void Charger::initPWM() {
   Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_PWM1);
 
   PWM->TCR = (1 << 0) | (1 << 3);                               // Timer enable bit and PWM enable bit
@@ -69,13 +73,6 @@ void Charger::initPWM(){
   Delay(10);
 }
 
-// Initialize GPIO
-void Charger::initGPIO(){
-  // Enable GPIO 0
-  Chip_GPIO_Init(LPC_GPIO);
-  Chip_GPIO_SetPinDIRInput(LPC_GPIO, 0, 0); // Set P0.0 as input
-}
-
 // Initialize ADC
 void Charger::initADC(){
   //Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ADC);
@@ -84,7 +81,6 @@ void Charger::initADC(){
   Chip_ADC_Init(LPC_ADC, &ADCSetup);
   Chip_ADC_SetSampleRate(LPC_ADC, &ADCSetup, ADCBitrate);
   Chip_ADC_SetStartMode(LPC_ADC, ADC_NO_START, ADC_TRIGGERMODE_RISING); // Must be set for burst mode readings
-  Chip_ADC_EnableChannel(LPC_ADC, ADC_CH0, ENABLE); // Load detect
   Chip_ADC_EnableChannel(LPC_ADC, ADC_CH1, ENABLE); // V
   Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE); // I
 }
@@ -136,16 +132,16 @@ void Charger::GetVI(double* V, double* I) {
   // One measurement takes 64 cycles
   for (uint16_t i = 0; i < powerMeasurementAverages; i++){
     // Wait for A/D conversion to complete on CH1
-    while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
-
-    // Read the value of the ADC on CH1
-    Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &temp);
-    dataVoltage += (uint32_t) temp;
-
     while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
 
-    // Read the value of the ADC on CH2
+    // Read the value of the ADC on CH1
     Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &temp);
+    dataVoltage += (uint32_t) temp;
+
+    while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
+
+    // Read the value of the ADC on CH2
+    Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &temp);
     dataCurrent += (uint32_t) temp;
   }
 
