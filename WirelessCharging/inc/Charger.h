@@ -61,7 +61,7 @@ class Charger {
   void initADC();
 
   // Constants
-  const double PWMCycleTime = 400 * 60.0/45.3; // Cycle time of the PWM, 400 = 60kHz.
+  const double PWMCycleTime = 400 * 60.0/44.5; // Cycle time of the PWM, 400 = 60kHz.
   const uint16_t PWMLatchEnable = (uint16_t) (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6); // MR0-6
   const uint16_t ADCBitrate = (uint16_t) 180000; // Bitrate of the ADC in Hz
   const uint16_t powerMeasurementAverages = 200;	 // How many ADC measurements do we take before we 'trust' the result?
