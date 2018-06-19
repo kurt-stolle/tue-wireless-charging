@@ -19,6 +19,8 @@ int main(void) {
   // One iteration of this loop can be viewed graphically in the provided flowchart
   double prevPower = 0.0;
   double I, V;
+  bool lastDecision = false;
+  unsigned int opposites = 0;
   for (;;) {
 	// Check whether a load is present
 	if (c->IsLoadPresent()) {
@@ -59,11 +61,36 @@ int main(void) {
 	  }
 
 	  // Decide whether to decrease, increase or keep cycle
-	  if (power < prevPower || I > 10 || V > 60) {
-		// Decrease duty cycle when power is less than previous power and when I or V is greater than 10 and 60 resp.
+	  if (power < prevPower || I > 100 || V > 60) {
+		  // Prevent jittery PWM
+		  if (lastDecision == true){
+			  if (opposites > 10){
+				  continue;
+			  }
+
+		  			opposites++;
+		  		} else {
+		  			opposites = 0;
+		  		}
+		  		lastDecision = false;
+
+		  // Decrease duty cycle when power is less than previous power and when I or V is greater than 10 and 60 resp.
 		c->SetBoostConverterDutyCycle(cycle - 0.01f);
+
+
 	  } else if (power > prevPower && c->GetBoostConverterDutyCycle() < cycleMax) {
-		// Increase duty cycle up to a limit of 0.9
+		  if (lastDecision == false){
+		  			  if (opposites > 10){
+		  				  continue;
+		  			  }
+
+		  		  			opposites++;
+		  		  		} else {
+		  		  			opposites = 0;
+		  		  		}
+		  		  		lastDecision = true;
+
+		  // Increase duty cycle up to a limit of 0.9
 		c->SetBoostConverterDutyCycle(cycle + 0.01f);
 	  }
 

@@ -158,6 +158,7 @@ void Charger::GetVI(double* V, double* I) {
 
   *I = (dataCurrent * 3.3) / 4096.0;
   *I = (*I - 2.5) / 0.04; // Offset of 2.5V and 40mV/A
+  //*I = 24.0167 * (*I) - 58.6585;
 }
 
 // IsCharging indicates whether charging has started
