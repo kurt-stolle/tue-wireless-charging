@@ -4,15 +4,16 @@
 
 // Main function
 int main(void) {
-  // REQUIRED SETUP
+  // Initialize board
   SystemCoreClockUpdate();
+  Board_Init();
 
   // Print something
-  printf("Initializing Charger");
+  DEBUGOUT("Initializing Charger");
 
 
   // Initialize the charger
-  Charger* c = new Charger();
+  Charger *c = new Charger();
 
   // Start an infinite loop
   // One iteration of this loop can be viewed graphically in the provided flowchart
@@ -26,15 +27,33 @@ int main(void) {
 		c->StartCharging();
 	  }
 
-	  // Measure V and I from sensors
-	  c->GetVI(&V, &I);
+	  // Take some averages in the duty cycle
+	  int count = 0;
+	  long double I_total = 0;
+	  long double V_total = 0;
+
+	  for (count = 0; count < 4; count++) {
+		// Wait until we're not near a switch
+		while (c->NearSwitch()) {}
+
+		c->GetVI(&V, &I);
+
+		// Add
+		I_total += I;
+		V_total += V;
+
+	  }
+
+	  // Calculate average
+	  I = (double) (I_total / count);
+	  V = (double) (V_total / count);
 
 	  // Calculate power V*I
 	  double power = V * I;
 
 	  // Fetch cycle from charger
 	  float cycle = c->GetBoostConverterDutyCycle();
-	  float cycleMax = (float) (1-(V/60));
+	  float cycleMax = (float) (1 - (V / 60));
 	  if (cycleMax > 0.9f) {
 		cycleMax = 0.9f;
 	  }
@@ -43,7 +62,7 @@ int main(void) {
 	  if (power < prevPower || I > 10 || V > 60) {
 		// Decrease duty cycle when power is less than previous power and when I or V is greater than 10 and 60 resp.
 		c->SetBoostConverterDutyCycle(cycle - 0.01f);
-	  } else if (power > prevPower && c->GetBoostConverterDutyCycle() < cycleMax){
+	  } else if (power > prevPower && c->GetBoostConverterDutyCycle() < cycleMax) {
 		// Increase duty cycle up to a limit of 0.9
 		c->SetBoostConverterDutyCycle(cycle + 0.01f);
 	  }

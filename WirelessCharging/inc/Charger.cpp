@@ -10,9 +10,6 @@
 
 // Constructor
 Charger::Charger() {
-  // Initialize board
-  Board_Init();
-
   // Load detection pin
   Chip_IOCON_PinMux(LPC_IOCON, 0, 0, IOCON_MODE_INACT, IOCON_FUNC0);
   Chip_GPIO_SetPinDIRInput(LPC_GPIO, 0, 0); // Set P0.0 as input
@@ -33,9 +30,6 @@ Charger::Charger() {
 
   // Initialize ADC
   initADC();
-
-  // Update clock
-  SystemCoreClockUpdate();
 }
 
 // Initialize PWM
@@ -69,6 +63,9 @@ void Charger::initPWM() {
   // Enable PWM 2,4 and 6 and Enable double-edged mode on PWM 2,4 and 6
   PWM->PCR = (1 << 2) | (1 << 4) | (1 << 6) | (1 << 10) | (1 << 12) | (1 << 14);
 
+  // Set TC to 0
+  PWM->TC = 0x0;
+
   // Small delay to propagate changes
   Delay(10);
 }
@@ -83,6 +80,7 @@ void Charger::initADC(){
   Chip_ADC_SetStartMode(LPC_ADC, ADC_NO_START, ADC_TRIGGERMODE_RISING); // Must be set for burst mode readings
   Chip_ADC_EnableChannel(LPC_ADC, ADC_CH1, ENABLE); // V
   Chip_ADC_EnableChannel(LPC_ADC, ADC_CH2, ENABLE); // I
+  Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
 }
 
  //StopCharging starts the charger
@@ -121,13 +119,18 @@ void Charger::GetVI(double* V, double* I) {
   }
 
   // Allocate variables to read into
-  uint16_t temp;
-  uint32_t dataCurrent = 0;
-  uint32_t dataVoltage = 0;
+  //uint16_t temp;
+  uint16_t dataCurrent = 0;
+  uint16_t dataVoltage = 0;
 
-  // Enable burst mode - start conversions
-  Chip_ADC_SetBurstCmd(LPC_ADC, ENABLE);
+  // Read voltage and current data
+  while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
+  Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &dataVoltage);
 
+  while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
+  Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataCurrent);
+
+	/*
   // Wait for A/D conversion to complete on CH2
   // One measurement takes 64 cycles
   for (uint16_t i = 0; i < powerMeasurementAverages; i++){
@@ -145,14 +148,10 @@ void Charger::GetVI(double* V, double* I) {
     dataCurrent += (uint32_t) temp;
   }
 
-  // Disable burst mode
-  Chip_ADC_SetBurstCmd(LPC_ADC, DISABLE);
-
   // Take the average value
   dataCurrent/=powerMeasurementAverages;
   dataVoltage/=powerMeasurementAverages;
-
-
+  */
   // Parse sensor readings: 3V3 * data/2^12
   *V = (dataVoltage * 3.3) / 4096.0;
   *V *= 70.0/3.3; // Voltage is scaled down from 70V to 3V3
@@ -193,4 +192,13 @@ void Charger::Delay(unsigned int ms){
   unsigned int i,j;
   for(i=0;i<ms;i++)
 	for(j=0;j<50000;j++);
+}
+
+// Wait until we're around the middle of the duty cycle
+bool Charger::NearSwitch() {
+  uint32_t center = PWM->MR6 / 2;
+  uint32_t bounds = PWMCycleTime / 12;
+  uint32_t timer = PWM->TC;
+
+  return (timer > bounds && timer < center-bounds) || (timer > center+bounds && timer < PWMCycleTime-bounds);
 }

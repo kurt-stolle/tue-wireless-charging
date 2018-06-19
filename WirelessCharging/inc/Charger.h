@@ -55,6 +55,8 @@ class Charger {
   void GetVI(double*,double*);
 
   void Delay(unsigned int ms);
+
+  bool NearSwitch();
  private:
   // Initialization
   void initPWM();
@@ -63,8 +65,8 @@ class Charger {
   // Constants
   const double PWMCycleTime = 400 * 60.0/44.5; // Cycle time of the PWM, 400 = 60kHz.
   const uint16_t PWMLatchEnable = (uint16_t) (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6); // MR0-6
-  const uint16_t ADCBitrate = (uint16_t) 180000; // Bitrate of the ADC in Hz
-  const uint16_t powerMeasurementAverages = 200;	 // How many ADC measurements do we take before we 'trust' the result?
+  const uint16_t ADCBitrate = (uint16_t) 200000; // Bitrate of the ADC in Hz
+  //const uint16_t powerMeasurementAverages = 200;	 // How many ADC measurements do we take before we 'trust' the result?
 
   // Save duty cycles
   float dutyBoost = 0.4;
