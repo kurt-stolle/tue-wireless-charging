@@ -88,10 +88,13 @@ void Charger::StopCharging() {
   // Set the charging flag
   charging = false;
 
-  // Set the duty cycle of the PWM going to the boost converter to 0
-   PWM->MR5 = 0;                // PWM6 set at 0
-   PWM->MR6 = 0;			    // PWM6 reset
-   PWM->LER = PWMLatchEnable;   // Push new MR5-6 values
+  //
+  PWM->MR1 = 0;                                    // PWM2 set at 0
+    PWM->MR2 = 0;    // PWM2 reset with deadtime added
+    PWM->MR3 = 0;    // PWM4 set
+    PWM->MR4 = 0;
+    PWM->LER = PWMLatchEnable;
+
 
    Delay(10);
 
@@ -104,8 +107,13 @@ void Charger::StartCharging() {
   // Set the charging flag
   charging = true;
 
-  // Re-set the duty cycle to the expected value
-  SetBoostConverterDutyCycle(dutyBoost);
+  PWM->MR1 = 0;                                    // PWM2 set at 0
+    PWM->MR2 = (uint32_t) (PWMCycleTime * (0.475));    // PWM2 reset with deadtime added
+    PWM->MR3 = (uint32_t) (PWMCycleTime * (0.5));    // PWM4 set
+    PWM->MR4 = (uint32_t) (PWMCycleTime * (0.975));
+
+  PWM->LER = PWMLatchEnable;
+
 
   // Disable LED indicator
   Board_LED_Set(0, true);
@@ -124,11 +132,11 @@ void Charger::GetVI(double* V, double* I) {
   uint16_t dataVoltage = 0;
 
   // Read voltage and current data
-  while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
-  Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &dataVoltage);
-
   while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH1, ADC_DR_DONE_STAT) != SET) {}
-  Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataCurrent);
+  Chip_ADC_ReadValue(LPC_ADC, ADC_CH1, &dataVoltage);
+
+  while (Chip_ADC_ReadStatus(LPC_ADC, ADC_CH2, ADC_DR_DONE_STAT) != SET) {}
+  Chip_ADC_ReadValue(LPC_ADC, ADC_CH2, &dataCurrent);
 
 	/*
   // Wait for A/D conversion to complete on CH2
@@ -168,9 +176,18 @@ bool Charger::IsCharging() {
 
 // DetectLoad will send out a pulse and measure the response of the sensor
 bool Charger::IsLoadPresent() {
-	bool loadPresent = Chip_GPIO_ReadPortBit(LPC_GPIO, 0, 0);
+	int loadPresent = 0;
+	static const int averages = 10;
+	for (int i = 0; i < averages; i++){
+		if (Chip_GPIO_ReadPortBit(LPC_GPIO, 0, 0)){
+			loadPresent++;
+		}
+		Delay(2);
+	}
 
-  return loadPresent;
+
+
+  return (loadPresent / averages) >=0.5;
 }
 
 float Charger::GetBoostConverterDutyCycle(){
@@ -179,7 +196,15 @@ float Charger::GetBoostConverterDutyCycle(){
 
 // SetBoostConverterDutyCycle sets the duty cycle of the PWM signal that should be wired to the boost converter
 void Charger::SetBoostConverterDutyCycle(float ratio) {
+	if (ratio < 0.1){
+		ratio = 0.1;
+	} else if (ratio > 0.7){
+		ratio = 0.7;
+	}
+
 	dutyBoost = ratio;
+
+
 
   PWM->MR5 = 0;                                    // PWM6 set at 0
   PWM->MR6 = (uint32_t) (PWMCycleTime * ratio);    // PWM6 reset
@@ -197,8 +222,8 @@ void Charger::Delay(unsigned int ms){
 
 // Wait until we're around the middle of the duty cycle
 bool Charger::NearSwitch() {
-  uint32_t center = PWM->MR6 / 2;
-  uint32_t bounds = PWMCycleTime / 12;
+  uint32_t center = PWM->MR6;
+  uint32_t bounds = PWMCycleTime / 8;
   uint32_t timer = PWM->TC;
 
   return (timer > bounds && timer < center-bounds) || (timer > center+bounds && timer < PWMCycleTime-bounds);
